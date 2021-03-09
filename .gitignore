@@ -27,8 +27,10 @@ grafana
 influxdb
 
 # Don't track mosquitto data
-mosquitto
 # But track mosquitto.conf
+mosquitto/*
+!mosquitto/config
+mosquitto/config/*
 !mosquitto/config/mosquitto.conf
 
 # Don't track photoview data
