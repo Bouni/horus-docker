@@ -1,0 +1,12 @@
+- platform: template
+  sensors:
+    leistung_entkalkungsanlage:
+      friendly_name: Leistung Entkalkungsanlage
+      value_template: "{{ states.switch.entkalkungsanlage_switch.attributes.current_power_w }}"
+      unit_of_measurement: W
+
+- platform: rest
+  name: Zustand Entkalkungsanlage
+  resource: http://192.168.88.32/state
+  method: GET
+  value_template: "{{value_json.state}}"

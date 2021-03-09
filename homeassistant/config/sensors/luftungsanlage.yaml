@@ -1,0 +1,73 @@
+- platform: modbus
+  registers:
+    - name: ventilation_level
+      hub: ventilation_unit
+      slave: 1
+      register: 100
+      register_type: holding
+    - name: einlass_ventilator
+      hub: ventilation_unit
+      unit_of_measurement: '%'
+      slave: 1
+      register: 102
+      register_type: input
+    - name: Auslass Ventilator 
+      hub: ventilation_unit
+      unit_of_measurement: '%'
+      slave: 1
+      register: 103
+      register_type: input
+    - name: Alarm 
+      hub: ventilation_unit
+      slave: 1
+      register: 101
+      register_type: input
+    - name: CO2 
+      hub: ventilation_unit
+      unit_of_measurement: 'PPM'
+      slave: 1
+      register: 10
+      register_type: input
+    - name: Temperatur Zuluft 
+      hub: ventilation_unit
+      unit_of_measurement: '°C'
+      slave: 1
+      register: 0
+      register_type: input
+      scale: 0.1
+      offset: -30.0
+      precision: 1
+    - name: Temperatur Frischluft 
+      hub: ventilation_unit
+      unit_of_measurement: '°C'
+      slave: 1
+      register: 2
+      register_type: input
+      scale: 0.1
+      offset: -30.0
+      precision: 1
+    - name: Temperatur Fortluft 
+      hub: ventilation_unit
+      unit_of_measurement: '°C'
+      slave: 1
+      register: 3
+      register_type: input
+      scale: 0.1
+      offset: -30.0
+      precision: 1
+    - name: Temperatur Abluft 
+      hub: ventilation_unit
+      unit_of_measurement: '°C'
+      slave: 1
+      register: 6
+      register_type: input
+      scale: 0.1
+      offset: -30.0
+      precision: 1
+
+- platform: template
+  sensors:
+    leistung_luftungsanlage:
+      friendly_name: Leistung Lüftungsanlage
+      value_template: "{{ states.switch.luftungsanlage_switch.attributes.current_power_w }}"
+      unit_of_measurement: W

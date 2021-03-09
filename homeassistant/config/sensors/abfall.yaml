@@ -1,0 +1,31 @@
+- platform: abfallplus
+  name: Bio Tonne
+  key: 5b0384147b5bc055c30fee1fb6db6f76
+  municipality: 270
+  street: 15720
+  trash_ids: "51, 17, 48, 31, 43, 20, 321"
+  pattern: Biotonne
+
+- platform: abfallplus
+  name: Blaue Tonne
+  key: 5b0384147b5bc055c30fee1fb6db6f76
+  municipality: 270
+  street: 15720
+  trash_ids: "51, 17, 48, 31, 43, 20, 321"
+  pattern: Blaue Tonne
+
+- platform: abfallplus
+  name: Restmüll
+  key: 5b0384147b5bc055c30fee1fb6db6f76
+  municipality: 270
+  street: 15720
+  trash_ids: "51, 17, 48, 31, 43, 20, 321"
+  pattern: Restmüll
+
+- platform: abfallplus
+  name: Gelber Sack
+  key: 5b0384147b5bc055c30fee1fb6db6f76
+  municipality: 270
+  street: 15720
+  trash_ids: "51, 17, 48, 31, 43, 20, 321"
+  pattern: Gelber Sack

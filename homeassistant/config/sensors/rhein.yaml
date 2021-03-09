@@ -1,0 +1,7 @@
+- platform: swiss_hydrological_data
+  station: 2143
+  monitored_conditions:
+    - temperature
+    - level
+    - discharge
+

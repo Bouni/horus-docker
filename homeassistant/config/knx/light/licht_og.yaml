@@ -1,0 +1,27 @@
+- name: "Licht Schlafzimmer"
+  address: "1/1/10"
+  state_address: "1/4/10"
+
+- name: "Ind. Beleuchtung Schlafzimmer"
+  address: "1/1/11"
+  state_address: "1/4/11"
+
+- name: "Licht Kinderzimmer Rhein"
+  address: "1/1/20"
+  state_address: "1/4/20"
+
+- name: "Licht Kinderzimmer Burg"
+  address: "1/1/30"
+  state_address: "1/4/30"
+
+- name: "Licht Badezimmer"
+  address: "1/1/40"
+  state_address: "1/4/40"
+
+- name: "Spiegellicht Badezimmer"
+  address: "1/1/41"
+  state_address: "1/4/41"
+
+- name: "Licht Treppenhaus OG"
+  address: "1/1/53"
+  state_address: "1/4/53"

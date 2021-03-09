@@ -1,0 +1,9 @@
+- name: Garagentor offen
+  state_address: "6/4/203"
+
+- name: Garagentor geschlossen
+  state_address: "6/4/202"
+
+- name: Garagentor in Bewegung
+  state_address: "6/4/205"
+

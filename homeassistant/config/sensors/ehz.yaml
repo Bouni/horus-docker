@@ -1,0 +1,30 @@
+- platform: mqtt
+  name: Momentaner Verbrauch Warmepumpe
+  unit_of_measurement: "W"
+  state_topic: "ehz/wp/current_energy"
+
+- platform: mqtt
+  name: Gesamt Verbrauch Warmepumpe
+  unit_of_measurement: "kWh"
+  state_topic: "ehz/wp/active_energy_total"
+
+- platform: mqtt
+  name: Verbrauch NT Warmepumpe
+  unit_of_measurement: "kWh"
+  state_topic: "ehz/wp/active_energy_t1"
+
+- platform: mqtt
+  name: Verbrauch HT Warmepumpe
+  unit_of_measurement: "kWh"
+  state_topic: "ehz/wp/active_energy_t2"
+
+- platform: mqtt
+  name: Momentaner Verbrauch Haus
+  unit_of_measurement: "W"
+  state_topic: "ehz/main/current_energy"
+
+- platform: mqtt
+  name: Verbrauch Haus
+  unit_of_measurement: "kWh"
+  state_topic: "ehz/main/active_energy_t1"
+

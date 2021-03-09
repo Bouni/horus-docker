@@ -1,0 +1,24 @@
+knx:
+  cover:
+    - name: "Jalousie Gibelseite Schlafzimmer"
+      move_long_address: '3/1/10'
+      move_short_address: '3/2/10'
+      position_address: '3/4/10'
+      position_state_address: '3/6/10'
+      angle_address: '3/5/10'
+      angle_state_address: '3/7/10'
+      travelling_time_down: 60
+      travelling_time_up: 63
+      invert_position: true
+      invert_angle: true
+
+    - name: "Rolladen Traufseite Schlafzimmer"
+      move_long_address: '3/1/11'
+      move_short_address: '3/2/11'
+      position_address: '3/4/11'
+      position_state_address: '3/6/11'
+      travelling_time_down: 16
+      travelling_time_up: 18
+      invert_position: true
+      invert_angle: true
+

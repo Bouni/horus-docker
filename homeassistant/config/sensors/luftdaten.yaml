@@ -1,0 +1,33 @@
+#- platform: rest
+#  name: luftdaten_pm10
+#  resource: "http://feinstaubsensor.home/data.json"
+#  value_template: "{{ value_json.sensordatavalues[0].value }}"
+#  unit_of_measurement: "µg/m³"
+#
+#- platform: rest
+#  name: luftdaten_pm2.5
+#  resource: "http://feinstaubsensor.home/data.json"
+#  value_template: "{{ value_json.sensordatavalues[1].value }}"
+#  unit_of_measurement: "µg/m³"
+#
+#- platform: rest
+#  name: luftdaten_temperature
+#  resource: "http://feinstaubsensor.home/data.json"
+#  value_template: "{{ value_json.sensordatavalues[2].value }}"
+#  unit_of_measurement: "°C"
+#
+#- platform: rest
+#  name: luftdaten_humidity
+#  resource: "http://feinstaubsensor.home/data.json"
+#  value_template: "{{ value_json.sensordatavalues[3].value }}"
+#  unit_of_measurement: "%"
+
+- platform: local_luftdaten
+  host: feinstaubsensor.home
+  name: Feinstaubsensor
+  monitored_conditions:
+    - SDS_P1
+    - SDS_P2
+    - temperature
+    - humidity
+    - signal

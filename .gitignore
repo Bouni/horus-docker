@@ -1,0 +1,60 @@
+# Don't track .env files
+*.env
+# Don't track secret files
+secrets.yaml
+
+# Don't track temporary data
+__*
+
+# Don't track bitwarden data
+bitwarden
+
+# Don't track caddy data
+caddy
+# But track Caddyfile
+!caddy/Caddyfile
+
+# Don't track some homeassistant files
+homeassistant/config/.storage
+homeassistant/config/home-assistant.log
+homeassistant/config/custom_components
+homeassistant/config/.HA_VERSION
+
+# Don't track grafana data
+grafana
+
+# Don't track influxdb data
+influxdb
+
+# Don't track mosquitto data
+mosquitto
+# But track mosquitto.conf
+!mosquitto/config/mosquitto.conf
+
+# Don't track photoview data
+photoview
+
+# Don't track pihole data
+pihole
+
+# Don't track postgresql data
+postgresql
+# But track postgresql init file
+!postgresql/init.sql
+
+# Don't track syncthing data
+syncthing
+
+# Don't track vikunja data
+vikunja
+# But track vikunja config
+!vikunja/config.yml
+
+# Don't track webdav data
+webdav
+
+# Don't track wireguard-ui data
+wireguard-ui
+
+# Don't track www data folder
+www

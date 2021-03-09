@@ -1,0 +1,212 @@
+version: '3'
+
+services:
+  
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - "8053:80"
+      - "53:53/tcp"
+      - "53:53/udp"
+    env_file:
+      - ./pihole/pihole.env
+    dns:
+      - 127.0.0.1
+      - 46.182.19.48
+    volumes:
+      - './pihole/etc/pihole/:/etc/pihole/'
+      - './pihole/etc/dnsmasq.d/:/etc/dnsmasq.d/'
+    restart: always
+
+  endlessh:
+    container_name: endlessh
+    image: harshavardhanj/endlessh:latest
+    ports:
+    - "2222:2222"
+    restart: always
+
+  caddy:
+    container_name: caddy
+    image: caddy
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy/data:/data
+      - ./caddy/config:/config
+      - ./www:/www
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - pihole
+  
+  homeassistant:
+    container_name: home-assistant
+    image: homeassistant/home-assistant:stable
+    volumes:
+      - ./homeassistant/config:/config
+      - /dev/modbus0:/dev/modbus0
+    env_file:
+      - ./homeassistant/homeassistant.env
+    restart: unless-stopped
+    depends_on:
+      - pihole
+      - mosquitto
+      - influxdb
+      - postgresql
+    network_mode: "host"
+    privileged: true
+  
+  postgresql:
+    container_name: postgresql
+    image: postgres:12
+    volumes:
+      - ./postgresql/initdb.d:/docker-entrypoint-initdb.d:ro
+      - ./postgresql/data:/var/lib/postgresql/data
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - ./postgresql/postgres.env
+    ports:
+      - "127.0.0.1:5432:5432" 
+    restart: unless-stopped
+    depends_on:
+      - pihole
+
+
+  influxdb:
+    container_name: influxdb
+    image: influxdb:latest
+    volumes:
+      - ./influxdb:/var/lib/influxdb2
+    ports:
+      - "127.0.0.1:8086:8086"
+    restart: unless-stopped
+    depends_on:
+      - pihole
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    depends_on:
+      - pihole
+      - influxdb
+    volumes:
+      - ./grafana:/var/lib/grafana
+    user: "1000:1000"
+    restart: unless-stopped
+
+  mosquitto:
+    image: eclipse-mosquitto
+    container_name: mosquitto
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    restart: unless-stopped
+    depends_on:
+      - pihole
+
+  syncthing:
+    image: linuxserver/syncthing
+    container_name: syncthing
+    env_file:
+      - ./syncthing/syncthing.env
+    volumes:
+      - ./syncthing:/config
+      - /storage/syncthing:/data1
+    restart: unless-stopped
+    network_mode: host
+    depends_on:
+      - pihole
+
+
+  wg-gen-web:
+    image: vx3r/wg-gen-web:latest
+    container_name: wg-gen-web
+    restart: unless-stopped
+    expose:
+      - "8080/tcp"
+    env_file:
+      - ./wireguard-ui/wg.env
+    volumes:
+      - /etc/wireguard:/data
+
+  wg-json-api:
+    image: james/wg-api:latest
+    container_name: wg-json-api
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    network_mode: "host"
+    command: wg-api --device wg0 --listen 192.168.88.23:8182
+
+  vikunja-api:
+    container_name: vikunja-api
+    image: vikunja/api
+    env_file:
+      - ./vikunja/vikunja.env
+    ports:
+      - 3456:3456
+    volumes:
+      - ./vikunja/files:/app/vikunja/files
+      - ./vikunja/db:/db
+    restart: unless-stopped
+    depends_on:
+      - pihole
+
+  vikunja-frontend:
+    container_name: vikunja-frontend
+    image: vikunja/frontend
+    restart: unless-stopped
+    depends_on:
+      - pihole
+
+  webdav:
+    container_name: webdav
+    image: hacdias/webdav:latest
+    user: 1000:1000
+    restart: unless-stopped
+    volumes:
+      - /storage/webdav:/data
+      - ./webdav/config.yaml:/config.yaml
+    command: --config /config.yaml
+    depends_on:
+      - pihole
+
+  bitwarden:
+    container_name: bitwarden
+    image: bitwardenrs/server:latest
+    restart: unless-stopped
+    volumes:
+      - ./bitwarden:/data
+    depends_on:
+      - pihole
+
+  photoviewdb:
+    container_name: photoviewdb
+    image: mariadb:10.5
+    restart: always
+    env_file:
+      - ./photoview/photoviewdb.env
+    volumes:
+      - ./photoview/mysql:/var/lib/mysql
+
+  photoview:
+    container_name: photoview
+    image: viktorstrate/photoview:1
+    restart: always
+    depends_on:
+      - photoviewdb
+      - pihole
+    env_file:
+      - ./photoview/photoview.env
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - ./photoview/api_cache:/app/cache
+      - /storage/pictures:/bouni/photos:ro
+      - /storage/pictures-to-sort:/bouni/photos-to-sort:ro

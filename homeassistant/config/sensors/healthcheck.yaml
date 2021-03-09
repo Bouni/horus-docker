@@ -1,0 +1,6 @@
+- platform: rest
+  resource: "https://healthchecks.bouni.de/badge/c7487fe6-01ad-4ea5-a673-d57e24c5980c/06Ee4BkQ-2.json"
+  name: borgmatic backups
+  value_template: '{% if value_json.status == "up" %}True{% else %}False{% endif %}'
+
+

@@ -1,0 +1,81 @@
+- platform: luxtronik
+  scan_interval: 60
+  sensors:
+    - group: calculations 
+      id: ID_WEB_Temperatur_TVL
+      friendly_name: Temperatur Vorlauf
+    - group: calculations 
+      id: ID_WEB_Temperatur_TRL
+      friendly_name: Temperatur Rücklauf
+
+    - group: calculations 
+      id: ID_WEB_Temperatur_TRL_ext
+      friendly_name: Temperatur Rücklauf Soll
+    - group: calculations 
+      id: ID_WEB_Sollwert_TRL_HZ
+      friendly_name: Temperatur Rücklauf Extern
+
+    - group: calculations 
+      id: ID_WEB_Temperatur_THG
+      friendly_name: Temperatur Heissgas
+    
+    - group: calculations 
+      id: ID_WEB_Temperatur_TA
+      friendly_name: Aussentemperaturfühler
+
+    - group: calculations 
+      id: ID_WEB_Mitteltemperatur
+      friendly_name: Mitteltemperatur
+
+    - group: calculations 
+      id: ID_WEB_Einst_BWS_akt
+      friendly_name: Temperatur Brauchwasser Soll
+    - group: calculations 
+      id: ID_WEB_Temperatur_TBW
+      friendly_name: Temperatur Brauchwasser
+
+    - group: calculations 
+      id: ID_WEB_Temperatur_TFB1
+      friendly_name: Mischkreis 1 Vorlauf
+    - group: calculations 
+      id: ID_WEB_Sollwert_TVL_MK1
+      friendly_name: Mischkreis 1 Vorlauf Soll
+
+    - group: calculations 
+      id: ID_WEB_Temperatur_TFB2
+      friendly_name: Mischkreis 2 Vorlauf
+    - group: calculations 
+      id: ID_WEB_Sollwert_TVL_MK2
+      friendly_name: Mischkreis 2 Vorlauf Soll
+    
+    - group: calculations 
+      id: ID_WEB_Temperatur_TWE
+      friendly_name: Fühler Wärmequelle Eingang
+    - group: calculations 
+      id: ID_WEB_Temperatur_TWA
+      friendly_name: Fühler Wärmequelle Ausgang
+
+    - group: calculations 
+      id: ID_WEB_LIN_UH
+      friendly_name: Überhitzung
+    - group: calculations 
+      id: ID_WEB_LIN_UH_Soll
+      friendly_name: Überhitzung Soll
+
+    - group: calculations 
+      id: ID_WEB_LIN_HD
+      friendly_name: Hochdruck
+    - group: calculations 
+      id: ID_WEB_LIN_ND
+      friendly_name: Niederdruck
+  
+    - group: parameters
+      id: ID_Ba_Hz_akt
+      friendly_name: Betriebsart Heizung
+    - group: parameters
+      id: ID_Ba_Bw_akt
+      friendly_name: Betriebsart Brauchwasser
+    - group: parameters
+      id: ID_Einst_BA_Kuehl_akt
+      friendly_name: Betriebsart Kühlung
+

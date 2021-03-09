@@ -1,0 +1,13 @@
+waermepumpe_nt_daily:
+  source: sensor.verbrauch_nt_warmepumpe
+  cycle: daily
+waermepumpe_ht_daily:
+  source: sensor.verbrauch_ht_warmepumpe
+  cycle: daily
+waermepumpe_nt_monthly:
+  source: sensor.verbrauch_nt_warmepumpe
+  cycle: monthly
+waermepumpe_ht_monthly:
+  source: sensor.verbrauch_ht_warmepumpe
+  cycle: monthly
+

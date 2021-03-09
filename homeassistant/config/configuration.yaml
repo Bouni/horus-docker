@@ -1,0 +1,161 @@
+homeassistant:
+  name: !secret ha_name
+  latitude: !secret ha_lat
+  longitude: !secret ha_lon
+  elevation: 330
+  unit_system: metric
+  time_zone: Europe/Berlin
+  customize_glob: !include customize_glob.yaml
+
+logger:
+  default: warning
+  logs:
+    custom_components.drkblutspende: debug
+    custom_components.abfallplus: warning
+    custom_components.luxtronik: debug
+    xknx: error
+
+recorder:
+  db_url: !secret postgres_db_url
+  purge_keep_days: 7
+  exclude:
+    domains:
+      - updater
+    entities:
+      - sun.sun # Don't record sun data
+      - sensor.last_boot # Comes from 'systemmonitor' sensor platform
+      - sensor.date
+    event_types:
+      - call_service
+
+history:
+  exclude:
+    entities:
+      - sensor.cos_phi_horus
+      - sensor.cos_phi_kaffemaschine
+      - sensor.cos_phi_kuhlschrank
+      - sensor.cos_phi_waschmaschine
+      - sensor.energy_cost_ht
+      - sensor.energy_cost_nt
+      - sensor.energy_cost_standard
+      - sensor.blindleistung_horus
+      - sensor.blindleistung_kaffemaschine
+      - sensor.blindleistung_kuhlschrank
+      - sensor.blindleistung_waschmaschine
+      - sensor.scheinleistung_horus
+      - sensor.scheinleistung_kaffemaschine
+      - sensor.scheinleistung_kuhlschrank
+      - sensor.scheinleistung_waschmaschine
+      - sensor.spannung_horus
+      - sensor.spannung_kaffemaschine
+      - sensor.spannung_kuhlschrank
+      - sensor.spannung_waschmaschine
+      - sensor.strom_horus
+      - sensor.strom_kaffemaschine
+      - sensor.strom_kuhlschrank
+      - sensor.strom_waschmaschine
+      - sensor.leistung_horus
+      - sensor.leistung_kaffemaschine
+      - sensor.leistung_kuhlschrank
+      - sensor.leistung_waschmaschine
+      - sensor.gesamtverbrauch_horus
+      - sensor.gesamtverbrauch_kaffemaschine
+      - sensor.gesamtverbrauch_kuhlschrank
+      - sensor.gesamtverbrauch_waschmaschine
+      - sensor.zero
+
+system_health:
+frontend:
+
+landroid_cloud:
+  - email: !secret worx_email 
+    password: !secret worx_pw
+
+hacs:
+  token: !secret hacs_token
+
+config:
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies: 172.0.0.0/8
+
+mobile_app:
+
+updater:
+
+sensor: !include_dir_merge_list sensors 
+cover: !include_dir_merge_list covers
+binary_sensor: !include_dir_merge_list binary_sensors
+switch: !include_dir_merge_list switches
+utility_meter: !include meters.yaml
+
+script: !include scripts.yaml
+automation: !include automations.yaml
+
+input_boolean:
+input_number:
+input_datetime:
+input_text:
+input_select:
+
+influxdb:
+  api_version: 2
+  ssl: false
+  host: horus.home
+  port: 8086
+  token: !secret influx_token 
+  organization: home-assistant-org
+  bucket: home-assistant-bucket
+
+speedtestdotnet:
+  scan_interval:
+    minutes: 10
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+
+knx:
+  tunneling:
+    host: '192.168.88.10'
+    port: 3671
+    local_ip: '192.168.88.23'
+  event_filter: ["6/1/161", "6/1/162"]
+  cover: !include_dir_merge_list knx/covers
+  binary_sensor: !include_dir_merge_list knx/binary_sensors
+  light: !include_dir_merge_list knx/light
+  switch: !include_dir_merge_list knx/switches
+  sensor: !include_dir_merge_list knx/sensors
+  
+
+luxtronik:
+  host: "192.168.88.11"
+  port: 8889
+
+corona_landkreis_waldshut:
+
+modbus:
+  name: ventilation_unit
+  type: serial
+  method: rtu
+  port: /dev/modbus0
+  baudrate: 19200
+  stopbits: 1
+  bytesize: 8
+  parity: E
+
+goecharger:
+  host: 192.168.88.26
+  serial: !secret go_e_charger_serial
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_api_key 
+    allowed_chat_ids: !secret telegram_chat_id
+
+notify:
+  - platform: telegram
+    name: HA Bot
+    chat_id: !secret telegram_chat_id
+

@@ -1,0 +1,75 @@
+- platform: template
+  sensors:
+    energy_cost_standard:
+      friendly_name: Preis Stromtarif Standard (1.8.0)
+      unit_of_measurement: '€'
+      value_template: "0.2737"
+    energy_cost_nt:
+      friendly_name: Preis Stromtarif NT (1.8.1)
+      unit_of_measurement: '€'
+      value_template: "0.2695"
+    energy_cost_ht:
+      friendly_name: Preis Stromtarif HT (1.8.2)
+      unit_of_measurement: '€'
+      value_template: "0.2190"
+
+- platform: template
+  sensors:
+    wp_cost_nt_current_day:
+      friendly_name: Wärmepumpe Kosten NT Heute
+      unit_of_measurement: '€'
+      value_template: "{{ (states('sensor.waermepumpe_nt_daily') | float * states('sensor.energy_cost_nt') | float ) | round(2) }}"
+    wp_cost_ht_current_day:
+      friendly_name: Wärmepumpe Kosten HT Heute
+      unit_of_measurement: '€'
+      value_template: "{{ (states('sensor.waermepumpe_ht_daily') | float * states('sensor.energy_cost_ht') | float ) | round(2) }}"
+    wp_cost_complete_current_day:
+      friendly_name: Wärmepumpe Kosten Gesamt Heute
+      unit_of_measurement: '€'
+      value_template: "{{ (states('sensor.wp_cost_nt_current_day') | float + states('sensor.wp_cost_ht_current_day') | float) | round(2) }}"
+
+- platform: template
+  sensors: 
+    wp_cost_nt_current_month:
+      friendly_name: Wärmepumpe Kosten NT aktueller Monat
+      unit_of_measurement: '€'
+      value_template: "{{ (states('sensor.waermepumpe_nt_monthly') | float * states('sensor.energy_cost_nt') | float ) | round(2) }}"
+    wp_cost_ht_current_month:
+      friendly_name: Wärmepumpe Kosten HT aktueller Monat
+      unit_of_measurement: '€'
+      value_template: "{{ (states('sensor.waermepumpe_ht_monthly') | float * states('sensor.energy_cost_ht') | float ) | round(2) }}"
+    wp_cost_complete_current_month:
+      friendly_name: Wärmepumpe Kosten Gesamt aktueller Monat
+      unit_of_measurement: '€'
+      value_template: "{{ (states('sensor.wp_cost_nt_current_month') | float + states('sensor.wp_cost_ht_current_month') | float) | round(2) }}"
+
+- platform: template
+  sensors:
+    wp_cost_nt_previous_day:
+      friendly_name: Wärmepumpe Kosten NT Vortag
+      unit_of_measurement: '€'
+      value_template: "{{ (state_attr('sensor.waermepumpe_nt_daily', 'last_period') | float * states('sensor.energy_cost_nt') | float ) | round(2) }}"
+    wp_cost_ht_previous_day:
+      friendly_name: Wärmepumpe Kosten HT Vortag
+      unit_of_measurement: '€'
+      value_template: "{{ (state_attr('sensor.waermepumpe_ht_daily', 'last_period') | float * states('sensor.energy_cost_ht') | float ) | round(2) }}"
+    wp_cost_complete_previous_day:
+      friendly_name: Wärmepumpe Kosten Gesamt Vortag
+      unit_of_measurement: '€'
+      value_template: "{{ (states('sensor.wp_cost_nt_previous_day') | float + states('sensor.wp_cost_ht_previous_day') | float) | round(2) }}"
+
+- platform: template
+  sensors: 
+    wp_cost_nt_previous_month:
+      friendly_name: Wärmepumpe Kosten NT Vormonat
+      unit_of_measurement: '€'
+      value_template: "{{ (state_attr('sensor.waermepumpe_nt_monthly', 'last_period') | float * states('sensor.energy_cost_nt') | float ) | round(2) }}"
+    wp_cost_ht_previous_month:
+      friendly_name: Wärmepumpe Kosten HT Vormonat
+      unit_of_measurement: '€'
+      value_template: "{{ (state_attr('sensor.waermepumpe_ht_monthly', 'last_period') | float * states('sensor.energy_cost_ht') | float ) | round(2) }}"
+    wp_cost_complete_previous_month:
+      friendly_name: Wärmepumpe Kosten Gesamt Vormonat
+      unit_of_measurement: '€'
+      value_template: "{{ (states('sensor.wp_cost_nt_previous_month') | float + states('sensor.wp_cost_ht_previous_month') | float) | round(2) }}"
+
