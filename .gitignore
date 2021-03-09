@@ -40,16 +40,16 @@ photoview
 pihole
 
 # Don't track postgresql data
-postgresql
 # But track postgresql init file
+postgresql/*
 !postgresql/init.sql
 
 # Don't track syncthing data
 syncthing
 
 # Don't track vikunja data
-vikunja
 # But track vikunja config
+vikunja/*
 !vikunja/config.yml
 
 # Don't track webdav data
