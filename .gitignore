@@ -10,7 +10,7 @@ __*
 bitwarden
 
 # Don't track caddy data
-caddy
+caddy/*
 # But track Caddyfile
 !caddy/Caddyfile
 

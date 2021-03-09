@@ -1,0 +1,56 @@
+{
+    admin off
+}
+
+blog.bouni.de {
+    root * /www/blog.bouni.de
+    file_server
+    log
+}
+
+travel.bouni.de {
+    root * /www/travel.bouni.de
+    file_server
+    log
+}
+
+ha.bouni.de {
+    reverse_proxy /* 192.168.88.23:8123
+    log
+}
+
+grafana.bouni.de {
+    reverse_proxy grafana:3000
+    log
+}
+
+vikunja.bouni.de {
+    reverse_proxy /api/* vikunja-api:3456
+    reverse_proxy /.well-known/* vikunja-api:3456
+    reverse_proxy /dav/* vikunja-api:3456
+    reverse_proxy vikunja-frontend:80
+    log
+}
+
+webdav.bouni.de {
+    reverse_proxy webdav:7070
+    log
+}
+
+bitwarden.bouni.de {
+    reverse_proxy bitwarden
+    log
+}
+
+photos.bouni.de {
+    reverse_proxy photoview
+    log
+}
+
+vpn.bouni.de {
+    @lanonly {
+        remote_ip 192.168.88.0/24
+    }
+    reverse_proxy @lanonly wg-gen-web:8080
+    log
+}
