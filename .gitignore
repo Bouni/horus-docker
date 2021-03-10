@@ -19,6 +19,7 @@ homeassistant/config/.storage
 homeassistant/config/home-assistant.log
 homeassistant/config/custom_components
 homeassistant/config/.HA_VERSION
+homeassistant/config/lox_token.cfg
 
 # Don't track grafana data
 grafana
