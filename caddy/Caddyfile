@@ -1,27 +1,36 @@
 {
     admin off
-}
-
-blog.bouni.de {
-    root * /www/blog.bouni.de
-    file_server
     log
 }
 
-travel.bouni.de {
-    root * /www/travel.bouni.de
-    file_server
-    log
+(lanonly) {
+    @lanonly {
+        remote_ip 192.168.88.0/24 192.168.89.0/24 
+    }
+}
+
+(error) {
+    handle_errors {
+        root * /www/caddy
+        rewrite * /{http.error.status_code}.html
+        file_server
+    }
+}
+
+dashboard.bouni.de {
+    reverse_proxy homer:8080
 }
 
 ha.bouni.de {
-    reverse_proxy /* 192.168.88.23:8123
-    log
+    reverse_proxy * 192.168.88.23:8123
+}
+
+shiori.bouni.de {
+    reverse_proxy shiori:8080
 }
 
 grafana.bouni.de {
     reverse_proxy grafana:3000
-    log
 }
 
 vikunja.bouni.de {
@@ -29,28 +38,47 @@ vikunja.bouni.de {
     reverse_proxy /.well-known/* vikunja-api:3456
     reverse_proxy /dav/* vikunja-api:3456
     reverse_proxy vikunja-frontend:80
-    log
 }
 
 webdav.bouni.de {
     reverse_proxy webdav:7070
-    log
 }
 
 bitwarden.bouni.de {
-    reverse_proxy bitwarden
-    log
+    reverse_proxy vaultwarden
 }
 
 photos.bouni.de {
     reverse_proxy photoview
-    log
+}
+
+blog.bouni.de {
+    root * /www/blog.bouni.de
+    file_server
+    import error
+}
+
+# Internal only
+
+travel.bouni.de {
+    import lanonly
+    root * /www/travel.bouni.de
+    file_server @lanonly
+    error * 403
+    import error
+}
+
+pihole.bouni.de {
+    import lanonly
+    redir / /admin/
+    reverse_proxy @lanonly pihole
+    error * 403
+    import error
 }
 
 vpn.bouni.de {
-    @lanonly {
-        remote_ip 192.168.88.0/24
-    }
+    import lanonly
     reverse_proxy @lanonly wg-gen-web:8080
-    log
+    error * 403
+    import error
 }

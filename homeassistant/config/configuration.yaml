@@ -10,9 +10,6 @@ homeassistant:
 logger:
   default: warning
   logs:
-    custom_components.drkblutspende: debug
-    custom_components.abfallplus: warning
-    custom_components.luxtronik: debug
     xknx: error
 
 recorder:
@@ -105,16 +102,8 @@ influxdb:
   host: horus.home
   port: 8086
   token: !secret influx_token 
-  organization: home-assistant-org
-  bucket: home-assistant-bucket
-
-speedtestdotnet:
-  scan_interval:
-    minutes: 10
-  monitored_conditions:
-    - ping
-    - download
-    - upload
+  organization: home-assistant
+  bucket: bucket
 
 knx:
   tunneling:
@@ -144,6 +133,9 @@ modbus:
   stopbits: 1
   bytesize: 8
   parity: E
+  sensors: !include_dir_merge_list modbus/sensors
+  binary_sensors: !include_dir_merge_list modbus/binary_sensors
+
 
 goecharger:
   host: 192.168.88.26

@@ -1,9 +1,6 @@
 - name: "Stellantrieb 1 Schlafzimmer"
   state_address: "4/3/10"
 
-- name: "Stellantrieb 1 Schlafzimmer"
-  state_address: "4/3/10"
-
 - name: "Stellantrieb 2 Schlafzimmer"
   state_address: "4/3/11"
 

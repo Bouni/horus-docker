@@ -65,14 +65,6 @@
       message: Morgen ist Restmüll!
       title: Müllabfuhr
     service: notify.mobile_app_oneplus_a3003
-  - service: persistent_notification.create
-    data:
-      message: Morgen ist Restmüll!
-      title: Müllabfuhr
-  - service: notify.ha_bot
-    data:
-      message: Morgen ist Restmüll!
-      title: Müllabfuhr
   mode: single
 - id: '1593947999011'
   alias: 'Garten: Bewässerung aus nach 2 Stunden'
@@ -107,14 +99,6 @@
       message: Morgen ist Biotonne!
       title: Müllabfuhr
     service: notify.mobile_app_oneplus_a3003
-  - service: persistent_notification.create
-    data:
-      message: Morgen ist Biotonne!
-      title: Müllabfuhr
-  - service: notify.ha_bot
-    data:
-      message: Morgen ist Biotonne!
-      title: Müllabfuhr
   mode: single
 - id: '1602440231159'
   alias: 'Müllabfuhr: Erinnerung Gelber Sack'
@@ -130,14 +114,6 @@
       message: Morgen ist Gelber Sack!
       title: Müllabfuhr
     service: notify.mobile_app_oneplus_a3003
-  - service: persistent_notification.create
-    data:
-      message: Morgen ist Gelber Sack!
-      title: Müllabfuhr
-  - service: notify.ha_bot
-    data:
-      message: Morgen ist Gelber Sack!
-      title: Müllabfuhr
   mode: single
 - id: '1602440278912'
   alias: 'Müllabfuhr: Erinnerung Blaue Tonne'
@@ -153,21 +129,13 @@
       message: Morgen ist Blaue Tonne!
       title: Müllabfuhr
     service: notify.mobile_app_oneplus_a3003
-  - service: persistent_notification.create
-    data:
-      message: Morgen ist Blaue Tonne!
-      title: Müllabfuhr
-  - service: notify.ha_bot
-    data:
-      message: Morgen ist Blaue Tonne!
-      title: Müllabfuhr
   mode: single
 - id: '1602440409146'
   alias: 'Lüftungsanlage: Alarm '
   description: ''
   trigger:
   - platform: numeric_state
-    entity_id: automation.alarm_luftungsanlage
+    entity_id: sensor.alarm
     above: '0'
   condition: []
   action:
@@ -193,7 +161,7 @@
   condition:
   - condition: state
     entity_id: binary_sensor.garagentor_offen
-    state: '''on'''
+    state: 'on'
   action:
   - service: notify.mobile_app_oneplus_a3003
     data:
@@ -271,7 +239,8 @@
   - service: notify.ha_bot
     data:
       title: Neue Corona Zahlen
-      message: Um {{ now().hour }}:{{ now().minute }} gab es neue Corona Zahlen!
+      message: Um {{ "%02d:%02d" % (now().hour, now().minute) }} gab es neue Corona
+        Zahlen!
   mode: single
 - id: '1614192808850'
   alias: 'Wallbox: Ladeende Info'
@@ -305,17 +274,19 @@
       title: eNiro laden gestartet
       message: Laden gestartet um {{ now().hour }}:{{ now().minute }}
   mode: single
-- id: '1615194212613'
-  alias: 'Corona: Impftermin'
+- id: '1626067681110'
+  alias: SwissHydroApi Check
   description: ''
   trigger:
-  - platform: state
-    entity_id: sensor.impftermin
-    to: 'true'
-  condition: []
+  - platform: time_pattern
+    minutes: '5'
+  condition:
+  - condition: template
+    value_template: '''{{ as_timestamp(now()) - as_timestamp(states.sensor.rhine_level.last_changed)
+      > 600 }}'''
   action:
-  - service: notify.ha_bot
+  - service: notify.mobile_app_oneplus_a3003
     data:
-      message: Impftermin vorhanden!
-      title: Impftermin vorhanden!
+      message: SwissHydroApi Stale
+      title: 'Warning: SwissHydroApi'
   mode: single

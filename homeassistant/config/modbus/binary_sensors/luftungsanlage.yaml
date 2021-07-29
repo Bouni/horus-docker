@@ -1,0 +1,6 @@
+- name: Hygrostat
+  slave: 1
+  address: 0 
+  input_type: discrete_input
+
+

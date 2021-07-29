@@ -29,11 +29,3 @@
       value_template: >-
         {{ states('sensor.alarm')|int|bitwise_and(64) != 0 }}
 
-- platform: modbus
-  inputs:
-    - name: Hygrostat
-      hub: ventilation_unit
-      slave: 1
-      address: 0 
-      input_type: discrete_input
-

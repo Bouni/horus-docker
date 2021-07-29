@@ -1,7 +1,18 @@
 version: '3'
 
 services:
-  
+
+  homer:
+    container_name: homer
+    image: b4bz/homer
+    container_name: homer
+    environment:
+      - UID=1000
+      - GID=1000
+    volumes:
+      - ./homer/assets/:/www/assets
+    restart: unless-stopped
+
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
@@ -55,6 +66,8 @@ services:
       - mosquitto
       - influxdb
       - postgresql
+    expose:
+      - 8123
     network_mode: "host"
     privileged: true
   
@@ -73,14 +86,14 @@ services:
     depends_on:
       - pihole
 
-
   influxdb:
     container_name: influxdb
     image: influxdb:latest
     volumes:
-      - ./influxdb:/var/lib/influxdb2
+      - ./influxdb/data:/var/lib/influxdb2
+      - ./influxdb/config:/etc/influxdb2
     ports:
-      - "127.0.0.1:8086:8086"
+      - "8086:8086"
     restart: unless-stopped
     depends_on:
       - pihole
@@ -130,6 +143,8 @@ services:
     restart: unless-stopped
     expose:
       - "8080/tcp"
+    ports:
+      - 7878:8080
     env_file:
       - ./wireguard-ui/wg.env
     volumes:
@@ -147,13 +162,12 @@ services:
   vikunja-api:
     container_name: vikunja-api
     image: vikunja/api
-    env_file:
-      - ./vikunja/vikunja.env
     ports:
       - 3456:3456
     volumes:
       - ./vikunja/files:/app/vikunja/files
-      - ./vikunja/db:/db
+      - ./vikunja/db/vikunja.db:/app/vikunja/vikunja.db
+      - ./vikunja/config.yml:/app/vikunja/config.yaml
     restart: unless-stopped
     depends_on:
       - pihole
@@ -177,17 +191,17 @@ services:
     depends_on:
       - pihole
 
-  bitwarden:
-    container_name: bitwarden
-    image: bitwardenrs/server:latest
+  vaultwarden:
+    container_name: vaultwarden
+    image: vaultwarden/server:latest
     restart: unless-stopped
     volumes:
-      - ./bitwarden:/data
+      - ./vaultwarden:/data
     depends_on:
       - pihole
 
-  photoviewdb:
-    container_name: photoviewdb
+  mariadb:
+    container_name: mariadb
     image: mariadb:10.5
     restart: always
     env_file:
@@ -197,16 +211,25 @@ services:
 
   photoview:
     container_name: photoview
-    image: viktorstrate/photoview:1
+    image: viktorstrate/photoview:latest
     restart: always
     depends_on:
-      - photoviewdb
+      - mariadb
       - pihole
     env_file:
       - ./photoview/photoview.env
     volumes:
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
+      #- /etc/timezone:/etc/timezone:ro
+      #- /etc/localtime:/etc/localtime:ro
       - ./photoview/api_cache:/app/cache
       - /storage/pictures:/bouni/photos:ro
       - /storage/pictures-to-sort:/bouni/photos-to-sort:ro
+    
+  shiori:
+    container_name: shiori
+    image: radhifadlillah/shiori
+    restart: always
+    depends_on:
+      - pihole
+    volumes:
+      - ./shiori/data:/srv/shiori

@@ -1,8 +1,8 @@
 "binary_sensor.stellantrieb*":
-    icon: lox:valve
+  icon: svg:svg/valve
     
 "cover.*":
-    icon: lox:blinds
+  icon: svg:svg/blinds-partial
 
 "luxtronik.*":
   templates:

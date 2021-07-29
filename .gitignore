@@ -6,8 +6,8 @@ secrets.yaml
 # Don't track temporary data
 __*
 
-# Don't track bitwarden data
-bitwarden
+# Don't track vaultwarden data
+vaultwarden
 
 # Don't track caddy data
 caddy/*
@@ -61,3 +61,11 @@ wireguard-ui
 
 # Don't track www data folder
 www
+
+# Don't track shiori data
+shiori
+
+# Don't track homer data
+# But track homer config
+homer/assets/*
+!homer/assets/config.yml
