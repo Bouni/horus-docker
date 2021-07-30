@@ -74,6 +74,11 @@ services:
         tag: "website"
         url: "https://blog.bouni.de"
         target: "_blank" # optional html a tag target attribute
+      - name: "Bouni's travel blog"
+        logo: "assets/tools/octopress.png"
+        tag: "website"
+        url: "https://travel.bouni.de"
+        target: "_blank" # optional html a tag target attribute
 
   - name: "Applications"
     icon: "fas fa-cloud"
@@ -97,9 +102,21 @@ services:
         target: "_blank" # optional html a tag target attribute
       - name: "Vaultwarden"
         logo: "assets/tools/bitwarden.png"
-        subtile: "Bitwarden server"
+        subtitle: "Bitwarden server"
         tag: "app"
         url: "https://bitwarden.bouni.de"
+        target: "_blank" # optional html a tag target attribute
+      - name: "Photoview"
+        logo: "assets/tools/photoview.svg"
+        subtitle: "Photo gallery"
+        tag: "app"
+        url: "https://photos.bouni.de"
+        target: "_blank" # optional html a tag target attribute
+      - name: "Vikunja"
+        logo: "assets/tools/vikunja.png"
+        subtitle: "ToDo List"
+        tag: "app"
+        url: "https://vikunja.bouni.de"
         target: "_blank" # optional html a tag target attribute
 
   - name: "Network"
@@ -107,9 +124,9 @@ services:
     items:
       - name: "Pi-hole"
         logo: "assets/tools/pihole.png"
-        subtitle: "Network-wide Ad Blocking"
+          #subtitle: "Network-wide Ad Blocking"
         tag: "network"
-        url: "https://pihole.bouni.de"
+        url: "https://pihole.bouni.de/admin"
         target: "_blank" # optional html a tag target attribute
       - name: "Wg Gen Web"
         logo: "assets/tools/wg-gen-web.png"
