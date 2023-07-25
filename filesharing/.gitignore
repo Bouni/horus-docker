@@ -1,0 +1,5 @@
+webdav/*
+!webdav/.gitkeep
+syncthing/*
+!syncthing/.gitkeep
+

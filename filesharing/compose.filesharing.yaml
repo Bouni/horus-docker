@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+
+  syncthing:
+    image: linuxserver/syncthing
+    container_name: syncthing
+    env_file:
+      - /opt/docker/filesharing/syncthing/syncthing.env
+    volumes:
+      - /opt/docker/filesharing/syncthing:/config
+      - /storage/syncthing:/data1
+    restart: unless-stopped
+    ports:
+      - 8384:8384
+      - 22000:22000/tcp
+      - 22000:22000/udp
+      - 21027:21027/udp
+    networks:
+      - webserver
+
+  webdav:
+    container_name: webdav
+    image: hacdias/webdav:latest
+    user: 1000:1000
+    restart: unless-stopped
+    volumes:
+      - /storage/webdav:/data
+      - /opt/docker/filesharing/webdav/config.yaml:/config.yaml
+    command: --config /config.yaml
+
+networks:
+  default:
+    name: filesharing
+  webserver:
+    external: true
