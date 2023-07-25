@@ -1,0 +1,11 @@
+
+diun/data/*
+!diun/data/.gitkeep
+
+omada/data/*
+!omada/data/.gitkeep
+omada/logs/*
+!omada/logs/.gitkeep
+
+wg-easy/data/*
+!wg-easy/data/.gitkeep
