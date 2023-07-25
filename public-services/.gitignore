@@ -1,0 +1,17 @@
+photoview/mysql/*
+!photoview/mysql/.gitkeep
+photoview/api_cache/*
+!photoview/api_cache/.gitkeep
+
+vikunja.db
+vikunja/files/*
+!vikunja/files/.gitkeep
+
+remark42/*
+!remark42/.gitkeep
+
+vaultwarden/*
+!vaultwarden/.gitkeep
+
+shiori/*
+!shiori/.gitkeep
