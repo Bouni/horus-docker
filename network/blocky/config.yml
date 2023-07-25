@@ -1,0 +1,95 @@
+upstream:
+  default:
+    - 5.9.164.112
+    - 9.9.9.9
+    - tcp-tls:fdns1.dismail.de:853
+    - https://dns.digitale-gesellschaft.ch/dns-query
+
+upstreamTimeout: 2s
+
+connectIPVersion: dual
+
+customDNS:
+  customTTL: 1h
+  filterUnmappedTypes: true
+  mapping:
+    router: 192.168.88.1
+    miniserver.home: 192.168.88.10
+    wp.home: 192.168.88.11
+    feinstaubsensor.home: 192.168.88.16
+    horus: 192.168.88.23
+    horus.home: 192.168.88.23
+    ha.bouni.de: 192.168.88.23
+    travel.bouni.de: 192.168.88.23
+    shiori.bouni.de: 192.168.88.23
+    vault.bouni.de: 192.168.88.23
+    photos.bouni.de: 192.168.88.23
+    vikunja.bouni.de: 192.168.88.23
+    syncthing.bouni.de: 192.168.88.23
+    vpn.bouni.de: 192.168.88.23
+    omada.bouni.de: 192.168.88.23
+
+blocking:
+  blackLists:
+    iot:
+      - |
+        /broadlink.com.cn/  # Broadlink Powerplugs
+        /nwsvr1.com/  # Alibaba Cloud (IP Camera)
+    ads:
+      - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+      - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+      - http://sysctl.org/cameleon/hosts
+      - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
+    special:
+      - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews/hosts
+  whiteLists:
+    ads:
+      - |
+        /ip-api.com/
+  clientGroupsBlock:
+    default:
+      - ads
+      - special
+      - iot
+  blockType: zeroIp
+  blockTTL: 1m
+  refreshPeriod: 4h
+  downloadTimeout: 4m
+  downloadAttempts: 5
+  downloadCooldown: 10s
+
+caching:
+  minTime: 5m
+  maxTime: 30m
+  maxItemsCount: 0
+  prefetching: true
+  prefetchExpires: 2h
+  prefetchThreshold: 5
+  prefetchMaxItemsCount: 0
+  cacheTimeNegative: 30m
+
+prometheus:
+  enable: true
+  path: /metrics
+
+minTlsServeVersion: 1.3
+
+bootstrapDns:
+  - tcp+udp:1.1.1.1
+  - https://1.1.1.1/dns-query
+  - upstream: https://dns.digitale-gesellschaft.ch/dns-query
+    ips:
+      - 185.95.218.42
+
+ports:
+  dns: 53
+  tls: 853
+  # https: 4443
+  http: 4000
+
+log:
+  level: info
+  format: text
+  timestamp: true
+  privacy: false
+

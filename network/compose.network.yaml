@@ -1,0 +1,103 @@
+version: "3"
+
+services:
+  diun:
+    container_name: diun
+    image: ghcr.io/crazy-max/diun
+    command: serve
+    volumes:
+      - "/opt/docker/network/diun/data:/data"
+      - "/opt/docker/network/diun/diun.yml:/diun.yml:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    env_file:
+      - /opt/docker/network/diun/diun.env 
+    restart: always
+
+
+  blocky:
+    container_name: blocky
+    image: spx01/blocky
+    restart: unless-stopped
+    hostname: blocky
+    environment:
+      - TZ=Europe/Berlin 
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /opt/docker/network/blocky/config.yml:/app/config.yml
+    network_mode: host
+
+  endless-go:
+    container_name: endlessh
+    image: shizunge/endlessh-go
+    user: "1001"
+    command:
+      - -interval_ms=1000
+      - -logtostderr
+      - -v=1
+      - -enable_prometheus
+      - -geoip_supplier=ip-api
+    ports:
+      - 2222:2222 
+    restart: always
+    networks:
+      - webserver
+
+  wg-easy:
+    image: weejewel/wg-easy
+    container_name: wg-easy
+    env_file:
+      - /opt/docker/network/wg-easy/.env
+    volumes:
+      - /opt/docker/network/wg-easy/data:/etc/wireguard
+    ports:
+      - "23427:51820/udp"
+      - "23428:51821/tcp"
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1
+    networks:
+      - webserver
+
+  omada-controller:
+    container_name: omada-controller
+    image: mbentley/omada-controller:latest
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Berlin
+      - MANAGE_HTTP_PORT=8088
+      - MANAGE_HTTPS_PORT=8043
+      - PORTAL_HTTP_PORT=8088
+      - PORTAL_HTTPS_PORT=8043
+      - PORT_APP_DISCOVERY=27001
+      - PORT_ADOPT_V1=29812
+      - PORT_UPGRADE_V1=29813
+      - PORT_MANAGER_V1=29811
+      - PORT_MANAGER_V2=29814
+      - PORT_DISCOVERY=29810
+      - SHOW_SERVER_LOGS=true
+      - SHOW_MONGODB_LOGS=false
+      # - PGID=508
+      # - PUID=508
+    ports:
+      - 8043:8043
+      - 29810:29810/udp
+      - 29811:29811
+      - 29812:29812
+      - 29813:29813
+      - 29814:29814
+    volumes:
+      - /opt/docker/network/omada/data:/opt/tplink/EAPController/data
+      - /opt/docker/network/omada/logs:/opt/tplink/EAPController/logs
+    networks:
+      - webserver
+
+networks:
+  default:
+    name: network
+  webserver:
+    external: true
+
