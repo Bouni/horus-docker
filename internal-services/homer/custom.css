@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+
+/* Sets the group title to be a bolder font */
+.group-title {
+  font-weight: 800;
+}
+
+/* Changes the card title to be a bolder font */
+.title {
+  font-weight: 700;
+}
+
+/* Changes the subtitle to be a bolder font */
+.subtitle {
+  font-weight: 500;
+}
+
+/* Adds spacing to the bottom of cards */
+body #app .card-content {
+  margin-bottom: 0.75rem;
+}
+
+ /*Adds more border radius to the cards */
+body .layout-vertical .column div:first-of-type .card {
+  border-radius: 0.5rem;
+}
+body .layout-vertical .card {
+  border-radius: 0.5rem;
+}
+.card {
+    border-radius: 0.5rem;
+}
+body .layout-vertical .column div:last-of-type .card { 
+    border-radius: 0.5rem; 
+}
+
+/* Changes Header Opacity */
+body #bighead .navbar {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+body .navbar-item:not(.search-bar) {
+    display: none;
+}
+
+body .search-bar input {
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 300px;
+    height: 50px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+body .search-bar input:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 500px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+body .search-bar .search-label::before {
+    top: 22px;
+}
+
+body #bighead .navbar a:focus, body #bighead .navbar a:hover {
+   background-color: rgba(0, 0, 0, 0);
+   color: var(--link-hover);
+}

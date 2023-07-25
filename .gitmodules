@@ -1,0 +1,3 @@
+[submodule "internal-services/homer/apps"]
+	path = internal-services/homer/apps
+	url = https://github.com/linuxserver/Heimdall-Apps

@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  homer:
+    container_name: homer
+    image: b4bz/homer
+    environment:
+      - UID=1000
+      - GID=1000
+    volumes:
+      - /opt/docker/internal-services/homer:/www/assets
+    restart: unless-stopped
+    networks:
+      - webserver
+
+
+networks:
+  default:
+    name: internal-services
+  webserver:
+    external: true
