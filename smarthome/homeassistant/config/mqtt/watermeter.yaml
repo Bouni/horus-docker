@@ -1,0 +1,26 @@
+sensor:
+  - unique_id: watermeter_grid_absolute
+    name: "Watermeter Absolute"
+    state_topic: "watermeter/main/value"
+    value_template: "{{ value }}"
+    unit_of_measurement: "m³"
+    icon: "mdi:water"
+
+  - unique_id: watermeter_grid_rate
+    name: "Watermeter Rate"
+    state_topic: "watermeter/main/rate"
+    value_template: "{{ value }}"
+    unit_of_measurement: "m³/min"
+    icon: "mdi:waves-arrow-right"
+
+  - unique_id: watermeter_grid_timestamp
+    name: "Watermeter timestamp"
+    state_topic: "watermeter/main/timestamp"
+    value_template: "{{ value }}"
+    icon: "mdi:clock-outline"
+
+  - unique_id: watermeter_gerrorr
+    name: "Watermeter error"
+    state_topic: "watermeter/main/error"
+    value_template: "{{ value }}"
+    icon: "mdi:alert-decagram-outline"

@@ -1,0 +1,35 @@
+- name: Temperatur Elternschlafzimmer
+  state_address: '4/2/10'
+  type: 'temperature'
+
+- name: Temperatur Kinderzimmer Rhein
+  state_address: '4/2/20'
+  type: 'temperature'
+
+- name: Temperatur Kinderzimmer Burg
+  state_address: '4/2/30'
+  type: 'temperature'
+
+- name: Temperatur Badezimmer
+  state_address: '4/2/40'
+  type: 'temperature'
+
+- name: Temperatur Büro
+  state_address: '4/2/60'
+  type: 'temperature'
+
+- name: Temperatur Flur EG
+  state_address: '4/2/70'
+  type: 'temperature'
+
+- name: Temperatur Wohnzimmer
+  state_address: '4/2/100'
+  type: 'temperature'
+
+- name: Temperatur Esszimmer
+  state_address: '4/2/110'
+  type: 'temperature'
+
+- name: Temperatur Küche
+  state_address: '4/2/120'
+  type: 'temperature'

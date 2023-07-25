@@ -1,0 +1,31 @@
+- platform: template
+  sensors:
+    alarm_external_stop:
+      friendly_name: "Alarm Externer Stop"
+      value_template: >-
+        {{ states('sensor.alarm')|int(default=0)|bitwise_and(1) != 0 }}
+    alarm_main_filter:
+      friendly_name: "Hauptfilter"
+      value_template: >-
+        {{ states('sensor.alarm')|int(default=0)|bitwise_and(2) != 0 }}
+    alarm_high_preasure:
+      friendly_name: "Hochdruck"
+      value_template: >-
+        {{ states('sensor.alarm')|int(default=0)|bitwise_and(4) != 0 }}
+    alarm_frost:
+      friendly_name: "Frost"
+      value_template: >-
+        {{ states('sensor.alarm')|int(default=0)|bitwise_and(8) != 0 }}
+    alarm_communication_error:
+      friendly_name: "Kommunikationsfehler"
+      value_template: >-
+        {{ states('sensor.alarm')|int(default=0)|bitwise_and(16) != 0 }}
+    alarm_external_filter:
+      friendly_name: "Externer Filter"
+      value_template: >-
+        {{ states('sensor.alarm')|int(default=0)|bitwise_and(32) != 0 }}
+    alarm_fan_speed:
+      friendly_name: "Lüfter Geschwindigkeit"
+      value_template: >-
+        {{ states('sensor.alarm')|int(default=0)|bitwise_and(64) != 0 }}
+

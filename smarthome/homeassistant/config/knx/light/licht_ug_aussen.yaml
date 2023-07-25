@@ -1,0 +1,28 @@
+- name: "Licht Flur UG"
+  address: "1/1/130"
+  state_address: "1/4/130"
+
+- name: "Licht Kleiner Keller"
+  address: "1/1/140"
+  state_address: "1/4/140"
+
+- name: "Licht Grosser Keller"
+  address: "1/1/150"
+  state_address: "1/4/150"
+
+- name: "Licht Technikraum"
+  address: "1/1/160"
+  state_address: "1/4/160"
+
+- name: "Licht Terasse"
+  address: "1/1/170"
+  state_address: "1/4/170"
+
+- name: "Licht Eingangsbereich"
+  address: "1/1/180"
+  state_address: "1/4/180"
+
+- name: "Licht Garage"
+  address: "1/1/200"
+  state_address: "1/4/200"
+

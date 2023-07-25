@@ -1,0 +1,572 @@
+- id: ventialtion level 4
+  alias: 'KNX: Set ventilation level to 4 via KNX Switch'
+  trigger:
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 6/1/162
+  action:
+  - service: modbus.write_register
+    data:
+      address: 100
+      hub: ventilation_unit
+      unit: 1
+      value: 4
+  mode: single
+- id: ventialtion level 2
+  alias: 'KNX: Set ventilation level to 2 via KNX Switch'
+  trigger:
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 6/1/161
+  action:
+  - service: modbus.write_register
+    data:
+      address: 100
+      hub: ventilation_unit
+      unit: 1
+      value: 2
+  mode: single
+- id: '1589439603239'
+  alias: 'Müllabfuhr: Erinnerung Restmüll'
+  description: ''
+  trigger:
+  - at: '20:00'
+    platform: time
+  condition:
+  - condition: template
+    value_template: '{{ state_attr(''sensor.restmull'', ''remaining'') == 1}}'
+  action:
+  - service: notify.mobile_app_oneplus8t
+    data:
+      title: Restmüll
+      message: Morgen ist Restmüll
+  mode: single
+- id: '1593947999011'
+  alias: 'Garten: Bewässerung aus nach 2 Stunden'
+  description: ''
+  trigger:
+  - entity_id:
+    - switch.brunnenwasserpumpe
+    for:
+      hours: 2
+      minutes: 0
+      seconds: 0
+    from: 'off'
+    platform: state
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus8t
+    data:
+      title: Brunnenwasserpumpe
+      message: Automatisch AUS nach 2 Stunden
+  - data: {}
+    entity_id: switch.brunnenwasserpumpe
+    service: switch.turn_off
+  mode: single
+- id: '1602440188705'
+  alias: 'Müllabfuhr: Erinnerung Biotonne'
+  description: ''
+  trigger:
+  - at: '20:00'
+    platform: time
+  condition:
+  - condition: template
+    value_template: '{{ state_attr(''sensor.bio_tonne'', ''remaining'') == 1}}'
+  action:
+  - service: notify.mobile_app_oneplus8t
+    data:
+      title: Biotonne
+      message: Morgen ist Biotonne
+  mode: single
+- id: '1602440231159'
+  alias: 'Müllabfuhr: Erinnerung Gelber Sack'
+  description: ''
+  trigger:
+  - at: '20:00'
+    platform: time
+  condition:
+  - condition: template
+    value_template: '{{ state_attr(''sensor.gelber_sack'', ''remaining'') == 1}}'
+  action:
+  - service: notify.mobile_app_oneplus8t
+    data:
+      title: Gelber Sack
+      message: Morgen ist Gelber Sack
+  mode: single
+- id: '1602440278912'
+  alias: 'Müllabfuhr: Erinnerung Blaue Tonne'
+  description: ''
+  trigger:
+  - at: '20:00'
+    platform: time
+  condition:
+  - condition: template
+    value_template: '{{ state_attr(''sensor.blaue_tonne'', ''remaining'') == 1}}'
+  action:
+  - service: notify.mobile_app_oneplus8t
+    data:
+      title: Blaue Tonne
+      message: Morgen ist Blaue Tonne
+  mode: single
+- id: '1602440409146'
+  alias: 'Lüftungsanlage: Alarm '
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.alarm
+    above: '0'
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Alarm
+      title: Lüftungsanlage
+  - service: persistent_notification.create
+    data:
+      message: Alarm
+      title: Lüftungsanlage
+  mode: single
+- id: '1604849403561'
+  alias: 'Garage: Garagentor Warnung'
+  description: ''
+  trigger:
+  - platform: time
+    at: '20:15:00'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.garagentor_offen
+    state: 'on'
+  action:
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Garagentor offen
+      title: Garagentor
+  mode: single
+- id: '1610090635718'
+  alias: 'Wallbox: set max current'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_select.goecharger_max_current
+  condition: []
+  action:
+  - service: goecharger.set_max_current
+    data_template:
+      max_current: '{{ states("input_select.goecharger_max_current") }}'
+  mode: single
+- id: '1610090775101'
+  alias: 'Wallbox: get max current'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.goecharger_024386_charger_max_current
+  condition: []
+  action:
+  - service: input_select.select_option
+    data_template:
+      entity_id: input_select.goecharger_max_current
+      option: '{{ states.sensor.goecharger_024386_charger_max_current.state }}'
+    entity_id: input_select.goecharger_max_current
+  mode: single
+- id: '1610090847300'
+  alias: 'Wallbox: set charge limit'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_number.goecharger_charge_limit
+  condition: []
+  action:
+  - service: goecharger.set_charge_limit
+    data_template:
+      charge_limit: '{{ states("input_number.goecharger_charge_limit") }}'
+  mode: single
+- id: '1610090921931'
+  alias: 'Wallbox: get charge Limit'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.goecharger_024386_charge_limit
+  condition: []
+  action:
+  - service: input_number.set_value
+    data_template:
+      entity_id: input_number.goecharger_charge_limit
+      value: '{{ states.sensor.goecharger_024386_charge_limit.state }}'
+    entity_id: input_number.goecharger_charge_limit
+  mode: single
+- id: '1614062167163'
+  alias: 'Corona: Neue Zahlen'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.corona_wt_active
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Um {{ "%02d:%02d" % (now().hour, now().minute) }} gab es neue Corona
+        Zahlen!
+  mode: single
+- id: '1614192808850'
+  alias: 'Wallbox: Ladeende Info'
+  description: Schickt die Kosten und Lademenge der letten Ladung nachdem diese beendet
+    wurde
+  trigger:
+  - platform: state
+    entity_id: sensor.goecharger_024386_car_status
+    from: charging
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus8t
+    data:
+      title: eNiro laden beendet
+      message: Es wurden {{ states('sensor.goecharger_024386_current_session_charged_energy')
+        }}kWh geladen, dies hat {{ "%0.3f" % (states('sensor.energy_cost_standard')|float
+        *states('sensor.goecharger_024386_current_session_charged_energy') | float
+        ) | float}}€ gekostet ({{ states('sensor.energy_cost_standard') }}€/kwh)
+  mode: single
+- id: '1614623279187'
+  alias: 'Wallbox: Ladestart info'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.goecharger_024386_car_status
+    to: charging
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus8t
+    data:
+      title: eNiro laden gestartet
+      message: Laden gestartet um {{ "%02d" % now().hour }}:{{ "%02d" % now().minute
+        }}
+  mode: single
+- id: '1645546587498'
+  alias: 'Entkalkungsanlage: Zustandsänderung'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.bwt_state
+    to: Error
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Salzmangel oder Fehler
+      title: Entkalkungsanlage
+  mode: single
+- id: '1653507305285'
+  alias: Beschattung West runter um 14:00
+  description: ''
+  trigger:
+  - platform: time
+    at: '14:00:00'
+  condition: []
+  action:
+  - service: cover.close_cover
+    data: {}
+    target:
+      entity_id:
+      - cover.beschattung_eg_west
+      - cover.beschattung_og_west
+  - service: cover.set_cover_tilt_position
+    data:
+      tilt_position: 0
+    target:
+      entity_id:
+      - cover.beschattung_eg_west
+      - cover.beschattung_og_west
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Beschattung West zu
+      title: Beschattung
+  mode: single
+- id: '1653507406662'
+  alias: Beschattung West hoch um 08:00
+  description: ''
+  trigger:
+  - platform: time
+    at: 08:00:00
+  condition: []
+  action:
+  - service: cover.open_cover
+    data: {}
+    target:
+      entity_id:
+      - cover.beschattung_eg_west
+      - cover.beschattung_og_west
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Beschattung West auf
+      title: Beschattung
+  mode: single
+- id: '1653507532603'
+  alias: Beschattung Ost runter um 07:00
+  description: ''
+  trigger:
+  - platform: time
+    at: 06:30:00
+  condition: []
+  action:
+  - service: cover.close_cover
+    data: {}
+    target:
+      entity_id: cover.beschattung_og_ost
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Beschattung Ost zu
+      title: Beschattung
+  mode: single
+- id: '1653507571749'
+  alias: Beschattung Ost hoch um 12:00
+  description: ''
+  trigger:
+  - platform: time
+    at: '12:00:00'
+  condition: []
+  action:
+  - service: cover.open_cover
+    data: {}
+    target:
+      entity_id: cover.beschattung_og_ost
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Beschattung Ost auf
+      title: Beschattung
+  mode: single
+- id: '1653507737737'
+  alias: Beschattung Süd runter um 10:00
+  description: ''
+  trigger:
+  - platform: time
+    at: '10:00:00'
+  condition: []
+  action:
+  - service: cover.close_cover
+    target:
+      entity_id: cover.beschattung_eg_sud
+    data: {}
+  - service: cover.set_cover_tilt_position
+    data:
+      tilt_position: 100
+    target:
+      entity_id: cover.beschattung_eg_sud
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Beschattung Süd zu
+      title: Beschattung
+  mode: single
+- id: '1653507866973'
+  alias: Beschattung Süd hoch um 06:00 NACHT
+  description: ''
+  trigger:
+  - platform: time
+    at: 06:00:00
+  condition: []
+  action:
+  - service: cover.open_cover
+    data: {}
+    target:
+      entity_id: cover.beschattung_eg_sud
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Beschattung Süd auf NACHT
+      title: Beschattung
+  mode: single
+- id: '1653508025379'
+  alias: Beschattung Süd runter um 22:00 NACHT
+  description: ''
+  trigger:
+  - platform: time
+    at: '22:00:00'
+  condition: []
+  action:
+  - service: cover.close_cover
+    data: {}
+    target:
+      entity_id: cover.beschattung_eg_sud
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Beschattung Süd zu Nacht
+      title: Beschattung
+  mode: single
+- id: '1655491825287'
+  alias: 'KNX: Bewässerung starten'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 6/1/132
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: switch.bewasserung_kreis_1
+      state: 'off'
+    - condition: state
+      entity_id: switch.bewasserung_kreis_2
+      state: 'off'
+    - condition: state
+      entity_id: switch.bewasserung_kreis_3
+      state: 'off'
+    - condition: state
+      entity_id: switch.bewasserung_kreis_4
+      state: 'off'
+  action:
+  - service: script.1589193268829
+    data: {}
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Bewässerung via KNX event gestartet
+  mode: single
+- id: '1655491866211'
+  alias: 'KNX: Tropfleitung starten'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 6/1/133
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: switch.bewasserung_kreis_1
+      state: 'off'
+    - condition: state
+      entity_id: switch.bewasserung_kreis_2
+      state: 'off'
+    - condition: state
+      entity_id: switch.bewasserung_kreis_3
+      state: 'off'
+    - condition: state
+      entity_id: switch.bewasserung_kreis_4
+      state: 'off'
+  action:
+  - service: script.1586954359079
+    data: {}
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Tropfleitung via KNX event gestartet
+  mode: single
+- id: '1655492002167'
+  alias: 'KNX: Rasenmäher Roboter starten'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 6/1/134
+  condition: []
+  action:
+  - service: landroid_cloud.start
+    data: {}
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Rasenmäher Roboter via KNX event gestartet
+  mode: single
+- id: '1655793512938'
+  alias: 'KNX: Terrassenlicht 100%'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 6/1/130
+  condition: []
+  action:
+  - service: script.terrassenlicht_100
+    data: {}
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Terrassenlicht 100% via KNX event gestartet
+  mode: single
+- id: '1655793538834'
+  alias: 'KNX: Terrassenlicht 50%'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: knx_event
+    event_data:
+      destination: 6/1/131
+  condition: []
+  action:
+  - service: script.terrassenlicht_50
+    data: {}
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Terrassenlicht 50% via KNX event gestartet
+  mode: single
+- id: '1678808841884'
+  alias: Garagentor automatisch zu
+  description: ''
+  trigger:
+  - platform: time_pattern
+    minutes: '30'
+  condition:
+  - condition: time
+    after: '22:00:00'
+    before: 05:00:00
+  - condition: device
+    type: is_on
+    device_id: b48883f5370286b6c4d88558ff509b74
+    entity_id: switch.garagentor_auf_2
+    domain: switch
+    for:
+      hours: 0
+      minutes: 30
+      seconds: 0
+  action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.garagentor_zu
+  mode: single
+- id: '1679337511606'
+  alias: 'Garagentor wird geöffnet '
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_off
+    device_id: e0ca83759a89ae292284e5d3a4286197
+    entity_id: switch.garagentor_zu_2
+    domain: switch
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: 'Garagentor wird geöffnet '
+  mode: single
+- id: '1679485691847'
+  alias: Update Stromtarif 2
+  description: ''
+  trigger:
+  - platform: time
+    at: 00:00:00
+  condition:
+  - condition: template
+    value_template: '{{ now() > "2023-03-31 23:59:00" | as_datetime | as_local }}'
+  action:
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Stromtarife aktualisiert
+      title: Stromtarife
+  - service: input_number.set_value
+    data:
+      value: 0.3576
+    target:
+      entity_id: input_number.stromtarif_standard
+  - service: input_number.set_value
+    data:
+      value: 0.3278
+    target:
+      entity_id: input_number.stromtarif_wp_nt_1_8_1
+  - service: input_number.set_value
+    data:
+      value: 0.3516
+    target:
+      entity_id: input_number.stromtarif_wp_ht_1_8_2
+  mode: single

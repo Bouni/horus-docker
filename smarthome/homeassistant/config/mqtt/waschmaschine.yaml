@@ -1,0 +1,50 @@
+sensor:
+  - unique_id: waschmaschine_voltage
+    name: Spannung Waschmaschine
+    value_template: '{{ value_json.ENERGY.Voltage }}'
+    unit_of_measurement: "V"
+    state_topic: "tele/waschmaschine/SENSOR"
+
+  - unique_id: waschmaschine_current
+    name: Strom Waschmaschine
+    value_template: '{{ value_json.ENERGY.Current }}'
+    unit_of_measurement: "A"
+    state_topic: "tele/waschmaschine/SENSOR"
+
+  - unique_id: waschmaschine_cosphi
+    name: Cos Phi Waschmaschine
+    value_template: '{{ value_json.ENERGY.Factor }}'
+    state_topic: "tele/waschmaschine/SENSOR"
+
+  - unique_id: waschmaschine_va
+    name: Scheinleistung Waschmaschine
+    value_template: '{{ value_json.ENERGY.ApparentPower }}'
+    unit_of_measurement: "VA"
+    state_topic: "tele/waschmaschine/SENSOR"
+
+  - unique_id: waschmaschine_var
+    name: Blindleistung Waschmaschine
+    value_template: '{{ value_json.ENERGY.ReactivePower }}'
+    unit_of_measurement: "Var"
+    state_topic: "tele/waschmaschine/SENSOR"
+
+  - unique_id: waschmaschine_watt
+    name: Leistung Waschmaschine
+    value_template: '{{ value_json.ENERGY.Power }}'
+    unit_of_measurement: "W"
+    state_topic: "tele/waschmaschine/SENSOR"
+    json_attributes_topic: "tele/waschmaschine/SENSOR"
+    json_attributes_template: '{{ value_json.ENERGY | tojson }}'
+
+  - unique_id: waschmaschine_kwh
+    name: Gesamtverbrauch Waschmaschine
+    value_template: '{{ value_json.ENERGY.Total }}'
+    unit_of_measurement: "kWh"
+    state_topic: "tele/waschmaschine/SENSOR"
+
+  - unique_id: waschmaschine_kwh_yesterday
+    name: Verbrauch Vortag Waschmaschine
+    value_template: '{{ value_json.ENERGY.Yesterday }}'
+    unit_of_measurement: "kWh"
+    state_topic: "tele/waschmaschine/SENSOR"
+

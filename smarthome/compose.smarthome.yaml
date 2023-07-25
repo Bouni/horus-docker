@@ -1,0 +1,62 @@
+version: "3"
+
+services:
+  homeassistant:
+    container_name: home-assistant
+    image: homeassistant/home-assistant:beta
+    volumes:
+      - /opt/docker/smarthome/homeassistant/config:/config
+      - /dev/modbus0:/dev/modbus0
+    env_file:
+      - /opt/docker/smarthome/homeassistant/homeassistant.env
+    restart: unless-stopped
+    depends_on:
+      - mosquitto
+      - influxdb
+      - postgresql
+    expose:
+      - 8123
+    network_mode: "host"
+    privileged: true
+
+  postgresql:
+    container_name: postgresql
+    image: postgres:12
+    volumes:
+      - /opt/docker/smarthome/postgresql/initdb.d:/docker-entrypoint-initdb.d:ro
+      - /opt/docker/smarthome/postgresql/data:/var/lib/postgresql/data
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - /opt/docker/smarthome/postgresql/postgres.env
+    ports:
+      - "127.0.0.1:5432:5432"
+    restart: unless-stopped
+
+  influxdb:
+    container_name: influxdb
+    image: influxdb:latest
+    volumes:
+      - /opt/docker/smarthome/influxdb/data:/var/lib/influxdb2
+      - /opt/docker/smarthome/influxdb/config:/etc/influxdb2
+    ports:
+      - "8086:8086"
+    restart: unless-stopped
+
+  mosquitto:
+    image: eclipse-mosquitto
+    container_name: mosquitto
+    volumes:
+      - /opt/docker/smarthome/mosquitto/config:/mosquitto/config
+      - /opt/docker/smarthome/mosquitto/data:/mosquitto/data
+      - /opt/docker/smarthome/mosquitto/log:/mosquitto/log
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    restart: unless-stopped
+
+
+networks:
+  default:
+    name: smarthome
+  webserver:
+    external: true

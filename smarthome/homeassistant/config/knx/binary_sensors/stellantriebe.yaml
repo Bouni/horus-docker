@@ -1,0 +1,36 @@
+- name: "Stellantrieb 1 Schlafzimmer"
+  state_address: "4/3/10"
+
+- name: "Stellantrieb 2 Schlafzimmer"
+  state_address: "4/3/11"
+
+- name: "Stellantrieb 1 Kinderzimmer Rhein"
+  state_address: "4/3/20"
+
+- name: "Stellantrieb 2 Kinderzimmer Rhein"
+  state_address: "4/3/21"
+
+- name: "Stellantrieb 1 Kinderzimmer Burg"
+  state_address: "4/3/30"
+
+- name: "Stellantrieb 2 Kinderzimmer Burg"
+  state_address: "4/3/31"
+
+- name: "Stellantrieb Büro"
+  state_address: "4/3/60"
+
+  #  #name: "Stellantrieb Flur EG"
+  #state_address: "4/3/70"
+
+- name: "Stellantrieb 1 Wohnzimmer"
+  state_address: "4/3/100"
+
+- name: "Stellantrieb 2 Wohnzimmer"
+  state_address: "4/3/101"
+
+- name: "Stellantrieb Esszimmer"
+  state_address: "4/3/110"
+
+- name: "Stellantrieb Küche"
+  state_address: "4/3/120"
+

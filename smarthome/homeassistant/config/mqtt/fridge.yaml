@@ -1,0 +1,48 @@
+sensor:
+  - unique_id: freezer_voltage
+    name: Spannung Kühlschrank
+    value_template: '{{ value_json.ENERGY.Voltage }}'
+    unit_of_measurement: "V"
+    state_topic: "tele/fridge/SENSOR"
+
+  - unique_id: freezer_current
+    name: Strom Kühlschrank
+    value_template: '{{ value_json.ENERGY.Current }}'
+    unit_of_measurement: "A"
+    state_topic: "tele/fridge/SENSOR"
+
+  - unique_id: freezer_cosphi
+    name: Cos Phi Kühlschrank
+    value_template: '{{ value_json.ENERGY.Factor }}'
+    state_topic: "tele/fridge/SENSOR"
+
+  - unique_id: freezer_va
+    name: Scheinleistung Kühlschrank
+    value_template: '{{ value_json.ENERGY.ApparentPower }}'
+    unit_of_measurement: "VA"
+    state_topic: "tele/fridge/SENSOR"
+
+  - unique_id: freezer_var
+    name: Blindleistung Kühlschrank
+    value_template: '{{ value_json.ENERGY.ReactivePower }}'
+    unit_of_measurement: "Var"
+    state_topic: "tele/fridge/SENSOR"
+
+  - unique_id: freezer_watt
+    name: Leistung Kühlschrank
+    value_template: '{{ value_json.ENERGY.Power }}'
+    unit_of_measurement: "W"
+    state_topic: "tele/fridge/SENSOR"
+
+  - unique_id: freezer_kwh
+    name: Gesamtverbrauch Kühlschrank
+    value_template: '{{ value_json.ENERGY.Total }}'
+    unit_of_measurement: "kWh"
+    state_topic: "tele/fridge/SENSOR"
+
+  - unique_id: freezer_kwh_yesterday
+    name: Verbrauch Vortag Kühlschrank
+    value_template: '{{ value_json.ENERGY.Yesterday }}'
+    unit_of_measurement: "kWh"
+    state_topic: "tele/fridge/SENSOR"
+

@@ -1,0 +1,52 @@
+
+- platform: luxtronik
+  sensors:
+    - group: calculations
+      id: ID_WEB_ASDin
+      friendly_name: Soledruck ausreichend
+    - group: calculations
+      id: ID_WEB_EVUin
+      friendly_name: EVU Sperre
+      invert: true
+    - group: calculations
+      id: ID_WEB_HDin
+      friendly_name: Hochdruck OK
+      invert: true
+    - group: calculations
+      id: ID_WEB_MOTin
+      friendly_name: Motorschutz OK
+
+    - group: calculations
+      id: ID_WEB_BUPout
+      friendly_name: Warmwasserumwälzpumpe 
+    - group: calculations
+      id: ID_WEB_FP2out
+      friendly_name: FBH Umwälzpumpe 2
+    - group: calculations
+      id: ID_WEB_HUPout
+      friendly_name: Entladepumpe Heizkreis
+    - group: calculations
+      id: ID_WEB_MA1out
+      friendly_name: Mischer 1 auf 
+    - group: calculations
+      id: ID_WEB_MZ1out
+      friendly_name: Mischer 1 zu
+    - group: calculations
+      id: ID_WEB_VBOout
+      friendly_name: Brunnenwasserpumpe
+    - group: calculations
+      id: ID_WEB_VD1out
+      friendly_name: Verdichter
+    - group: calculations
+      id: ID_WEB_ZIPout
+      friendly_name: Zirkulationspumpe
+    - group: calculations
+      id: ID_WEB_ZUPout
+      friendly_name: Zusatzumwälzpumpe
+    - group: calculations
+      id: ID_WEB_MA2out
+      friendly_name: Mischer 2 auf 
+    - group: calculations
+      id: ID_WEB_MZ2out
+      friendly_name: Mischer 2 zu
+      

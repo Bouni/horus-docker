@@ -1,0 +1,149 @@
+homeassistant:
+  customize_glob: !include customize_glob.yaml
+
+energy:
+
+logger:
+  default: warning
+  logs:
+    xknx:
+      error
+    custom_components.landroid_cloud: debug
+      #custom_components.drkblutspende: debug
+      # custom_components.drkblutspende: debug
+
+recorder:
+  db_url: !secret postgres_db_url
+  purge_keep_days: 7
+  exclude:
+    domains:
+      - updater
+    entities:
+      - sun.sun # Don't record sun data
+      - sensor.last_boot # Comes from 'systemmonitor' sensor platform
+      - sensor.date
+    event_types:
+      - call_service
+
+history:
+  exclude:
+    entities:
+      - sensor.cos_phi_horus
+      - sensor.cos_phi_kaffemaschine
+      - sensor.cos_phi_kuhlschrank
+      - sensor.cos_phi_waschmaschine
+      - sensor.energy_cost_ht
+      - sensor.energy_cost_nt
+      - sensor.energy_cost_standard
+      - sensor.blindleistung_horus
+      - sensor.blindleistung_kaffemaschine
+      - sensor.blindleistung_kuhlschrank
+      - sensor.blindleistung_waschmaschine
+      - sensor.scheinleistung_horus
+      - sensor.scheinleistung_kaffemaschine
+      - sensor.scheinleistung_kuhlschrank
+      - sensor.scheinleistung_waschmaschine
+      - sensor.spannung_horus
+      - sensor.spannung_kaffemaschine
+      - sensor.spannung_kuhlschrank
+      - sensor.spannung_waschmaschine
+      - sensor.strom_horus
+      - sensor.strom_kaffemaschine
+      - sensor.strom_kuhlschrank
+      - sensor.strom_waschmaschine
+      - sensor.leistung_horus
+      - sensor.leistung_kaffemaschine
+      - sensor.leistung_kuhlschrank
+      - sensor.leistung_waschmaschine
+      - sensor.gesamtverbrauch_horus
+      - sensor.gesamtverbrauch_kaffemaschine
+      - sensor.gesamtverbrauch_kuhlschrank
+      - sensor.gesamtverbrauch_waschmaschine
+      - sensor.zero
+
+system_health:
+frontend:
+
+config:
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies: 172.0.0.0/8
+
+mobile_app:
+
+# updater:
+
+sensor: !include_dir_merge_list sensors
+cover: !include_dir_merge_list covers
+binary_sensor: !include_dir_merge_list binary_sensors
+switch: !include_dir_merge_list switches
+# utility_meter: !include meters.yaml
+# template:
+#   - sensor:
+#       - name: Restmüll Deutsch
+#         state: >
+#           {% set days = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]  %}
+#           {% set state = states("sensor.restmull") %}
+#           {% set date = strptime(state, "%A, %d.%m.%Y") %}
+#           {{ days[date.weekday()] }}, {{ date.strftime("%d.%m.%Y") }}
+#         attributes:
+#           remaining: >
+#             {{ state_attr("sensor.restmull", 'remaining') }}
+
+mqtt: !include_dir_merge_list mqtt
+script: !include scripts.yaml
+automation: !include automations.yaml
+
+input_boolean:
+input_number:
+input_datetime:
+input_text:
+input_select:
+
+# influxdb:
+#   api_version: 2
+#   ssl: false
+#   host: horus.home
+#   port: 8086
+#   token: !secret influx_token
+#   organization: home-assistant
+#   bucket: bucket
+
+knx:
+  cover: !include_dir_merge_list knx/covers
+  binary_sensor: !include_dir_merge_list knx/binary_sensors
+  light: !include_dir_merge_list knx/light
+  switch: !include_dir_merge_list knx/switches
+  sensor: !include_dir_merge_list knx/sensors
+  event: !include_dir_merge_list knx/events
+
+luxtronik:
+  host: "192.168.88.11"
+  port: 8889
+  update_immediately_after_write: true
+
+modbus:
+  name: ventilation_unit
+  type: serial
+  method: rtu
+  port: /dev/modbus0
+  baudrate: 19200
+  stopbits: 1
+  bytesize: 8
+  parity: E
+  sensors: !include_dir_merge_list modbus/sensors
+  binary_sensors: !include_dir_merge_list modbus/binary_sensors
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_api_key
+    allowed_chat_ids: !secret telegram_chat_id
+
+notify:
+  - platform: telegram
+    name: HA Bot
+    chat_id: !secret telegram_chat_id
+# landroid_cloud:
+#   - email: !secret worx_email
+#     password: !secret worx_pw

@@ -1,0 +1,64 @@
+- name: ventilation_level
+  slave: 1
+  address: 100
+  input_type: holding
+  data_type: int16
+- name: einlass_ventilator
+  unit_of_measurement: '%'
+  slave: 1
+  address: 102
+  input_type: input
+  data_type: int16
+- name: Auslass Ventilator 
+  unit_of_measurement: '%'
+  slave: 1
+  address: 103
+  input_type: input
+  data_type: int16
+- name: Alarm 
+  slave: 1
+  address: 101
+  input_type: input
+  data_type: int16
+- name: CO2 
+  unit_of_measurement: 'PPM'
+  slave: 1
+  address: 10
+  input_type: input
+  data_type: int16
+- name: Temperatur Zuluft 
+  unit_of_measurement: '°C'
+  slave: 1
+  address: 0
+  input_type: input
+  scale: 0.1
+  offset: -30.0
+  precision: 1
+  data_type: int16
+- name: Temperatur Frischluft 
+  unit_of_measurement: '°C'
+  slave: 1
+  address: 2
+  input_type: input
+  scale: 0.1
+  offset: -30.0
+  precision: 1
+  data_type: int16
+- name: Temperatur Fortluft 
+  unit_of_measurement: '°C'
+  slave: 1
+  address: 3
+  input_type: input
+  scale: 0.1
+  offset: -30.0
+  precision: 1
+  data_type: int16
+- name: Temperatur Abluft 
+  unit_of_measurement: '°C'
+  slave: 1
+  address: 6
+  input_type: input
+  scale: 0.1
+  offset: -30.0
+  precision: 1
+  data_type: int16

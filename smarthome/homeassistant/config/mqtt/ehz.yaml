@@ -1,0 +1,43 @@
+sensor:
+  - unique_id: ehz_heatpump_watt
+    name: Momentaner Verbrauch Warmepumpe
+    unit_of_measurement: "W"
+    state_class: measurement
+    device_class: energy
+    state_topic: "ehz/wp/current_energy"
+
+  - unique_id: ehz_heatpump_kwh
+    name: Gesamt Verbrauch Warmepumpe
+    unit_of_measurement: "kWh"
+    state_class: measurement
+    device_class: energy
+    state_topic: "ehz/wp/active_energy_total"
+
+  - unique_id: ehz_heatpump_kwh_tarif1
+    name: Verbrauch NT Warmepumpe
+    unit_of_measurement: "kWh"
+    state_class: measurement
+    device_class: energy
+    state_topic: "ehz/wp/active_energy_t1"
+
+  - unique_id: ehz_heatpump_kwh_tarfif2
+    name: Verbrauch HT Warmepumpe
+    unit_of_measurement: "kWh"
+    state_class: measurement
+    device_class: energy
+    state_topic: "ehz/wp/active_energy_t2"
+
+  - unique_id: ehz_main_watt
+    name: Momentaner Verbrauch Haus
+    unit_of_measurement: "W"
+    state_class: measurement
+    device_class: energy
+    state_topic: "ehz/main/current_energy"
+
+  - unique_id: ehz_main_kwh
+    name: Verbrauch Haus
+    unit_of_measurement: "kWh"
+    state_class: measurement
+    device_class: energy
+    state_topic: "ehz/main/active_energy_t1"
+

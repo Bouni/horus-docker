@@ -1,0 +1,59 @@
+- platform: group
+  name: Beschattung EG
+  entities:
+    - cover.jalousie_esszimmer
+    - cover.jalousie_gibelseite_buro
+    - cover.jalousie_gibelseite_wohnzimmer
+    - cover.jalousie_traufseite_wohnzimmer
+    - cover.jalousie_kuche
+
+- platform: group
+  name: Beschattung OG
+  entities:
+    - cover.jalousie_gibelseite_schlafzimmer
+    - cover.rolladen_traufseite_schlafzimmer
+    - cover.jalousie_gibelseite_kinderzimmer_rhein
+    - cover.jalousie_traufseite_kinderzimmer_rhein
+    - cover.rolladen_giebelseite_kinderzimmer_burg
+    - cover.jalousie_traufseite_kinderzimmer_burg
+    - cover.rolladen_gibelseite_bad
+    - cover.rolladen_traufseite_bad
+
+- platform: group
+  name: Beschattung EG West
+  entities:
+    - cover.jalousie_gibelseite_buro
+    - cover.jalousie_gibelseite_wohnzimmer
+
+- platform: group
+  name: Beschattung OG West
+  entities:
+    - cover.jalousie_gibelseite_schlafzimmer
+    - cover.jalousie_gibelseite_kinderzimmer_rhein
+
+- platform: group
+  name: Beschattung EG Süd
+  entities:
+    - cover.jalousie_esszimmer
+    - cover.jalousie_traufseite_wohnzimmer
+    - cover.jalousie_kuche
+
+- platform: group
+  name: Beschattung OG Ost
+  entities:
+    - cover.rolladen_giebelseite_kinderzimmer_burg
+    - cover.rolladen_gibelseite_bad
+
+- platform: group
+  name: Beschattung Nacht
+  entities:
+    - cover.jalousie_esszimmer
+    - cover.jalousie_gibelseite_buro
+    - cover.jalousie_gibelseite_wohnzimmer
+    - cover.jalousie_traufseite_wohnzimmer
+    - cover.jalousie_kuche
+    - cover.rolladen_traufseite_schlafzimmer
+    - cover.jalousie_traufseite_kinderzimmer_rhein
+    - cover.rolladen_giebelseite_kinderzimmer_burg
+    - cover.jalousie_traufseite_kinderzimmer_burg
+    - cover.rolladen_traufseite_bad

@@ -1,0 +1,17 @@
+"binary_sensor.stellantrieb*":
+  icon: svg:svg/valve
+    
+"cover.*":
+  icon: svg:svg/blinds-partial
+
+"luxtronik.*":
+  templates:
+    icon: >
+      if (state === 'on') {
+        return 'mdi:circle'; 
+      } else {
+        return 'mdi:circle-double';
+      }
+    icon_color: >
+      if (state === 'on') return 'var(--state-icon-active-color)';
+      return icon_color;

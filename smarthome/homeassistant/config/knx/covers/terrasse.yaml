@@ -1,0 +1,9 @@
+- name: "Beschattung Terrasse"
+  move_long_address: '3/1/170'
+  move_short_address: '3/2/170'
+  position_address: '3/4/170'
+  position_state_address: '3/6/170'
+  travelling_time_down: 45
+  travelling_time_up: 45
+    #invert_position: true
+

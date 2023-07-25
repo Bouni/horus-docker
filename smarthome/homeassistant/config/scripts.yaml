@@ -1,0 +1,121 @@
+'1586954359079':
+  alias: Tropfleitung
+  sequence:
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Tropfleitung EIN {{ states("input_number.dauer_tropfleitung") | int
+        }}
+  - data: {}
+    entity_id: switch.brunnenwasserpumpe
+    service: switch.turn_on
+  - delay: '1'
+  - data: {}
+    entity_id: switch.bewasserung_kreis_4
+    service: switch.turn_on
+  - delay:
+      minutes: '{{ states("input_number.dauer_tropfleitung") | int }}'
+  - data: {}
+    entity_id:
+    - switch.bewasserung_kreis_4
+    - switch.brunnenwasserpumpe
+    service: switch.turn_off
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Tropfleitung AUS
+  mode: single
+  icon: mdi:water
+'1589193268829':
+  alias: Bewässerung
+  sequence:
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Bewässerung EIN
+      title: 'Bewässerung '
+  - data: {}
+    entity_id: switch.brunnenwasserpumpe
+    service: switch.turn_on
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Bewässerung Kiwi EIN für {{ states("input_number.dauer_bewasserung")
+        | int }} Minuten
+  - data: {}
+    service: switch.turn_on
+    target:
+      entity_id: switch.bewasserung_kreis_3
+  - delay:
+      minutes: '{{ states("input_number.dauer_bewasserung") | int }}'
+  - data: {}
+    entity_id: switch.bewasserung_kreis_3
+    service: switch.turn_off
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Bewässerung Weide EIN für {{ states("input_number.dauer_bewasserung")
+        | int }} Minuten
+  - data: {}
+    service: switch.turn_on
+    target:
+      entity_id: switch.bewasserung_kreis_1
+  - delay:
+      minutes: '{{ states("input_number.dauer_bewasserung") | int }}'
+  - data: {}
+    entity_id: switch.bewasserung_kreis_1
+    service: switch.turn_off
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: Bewässerung Kirsche EIN für {{ states("input_number.dauer_bewasserung")
+        | int }} Minuten
+  - data: {}
+    entity_id: switch.bewasserung_kreis_2
+    service: switch.turn_on
+  - delay:
+      minutes: '{{ states("input_number.dauer_bewasserung") | int }}'
+  - data: {}
+    entity_id: switch.bewasserung_kreis_2
+    service: switch.turn_off
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id:
+      - switch.bewasserung_kreis_1
+      - switch.bewasserung_kreis_2
+      - switch.bewasserung_kreis_4
+      - switch.brunnenwasserpumpe
+  - service: notify.mobile_app_oneplus8t
+    data:
+      message: 'Bewässerung AUS '
+  mode: restart
+  icon: mdi:sprinkler-variant
+terrassenlicht_100:
+  alias: Terrassenlicht 100%
+  sequence:
+  - service: light.toggle
+    data: {}
+    target:
+      entity_id:
+      - light.licht_reihe_1
+      - light.licht_reihe_2
+      - light.licht_reihe_3
+      - light.licht_reihe_4
+      - light.licht_reihe_5
+      - light.licht_reihe_6
+      - light.licht_reihe_7
+  mode: single
+  icon: mdi:lightbulb-multiple
+terrassenlicht_50:
+  alias: Terrassenlicht 50%
+  sequence:
+  - service: light.toggle
+    data: {}
+    target:
+      entity_id:
+      - light.licht_reihe_1
+      - light.licht_reihe_3
+      - light.licht_reihe_5
+      - light.licht_reihe_7
+  mode: single
+  icon: mdi:lightbulb

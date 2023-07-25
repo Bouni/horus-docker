@@ -1,0 +1,9 @@
+- platform: drkblutspende
+  zipcode: "79790"
+  #radius: 10
+  #countyid: "08337"
+  #lookahead: 14
+  timeformat: "%A, %d.%m.%Y"
+  zipfilter: 
+    - "79790"
+    - "79801"

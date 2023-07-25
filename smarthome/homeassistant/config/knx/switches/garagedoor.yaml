@@ -1,0 +1,9 @@
+- name: Garagentor Auf
+  address: '6/1/202'
+
+- name: Garagentor Zu
+  address: '6/1/203'
+
+- name: Garagentor Lüftungsstellung
+  address: '6/1/204'
+

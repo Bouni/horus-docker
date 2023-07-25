@@ -1,0 +1,12 @@
+waermepumpe_nt_daily:
+  source: sensor.total_energy_tarif_1_2
+  cycle: daily
+waermepumpe_ht_daily:
+  source: sensor.sensor.total_energy_tarif_2_2
+  cycle: daily
+waermepumpe_nt_monthly:
+  source: sensor.total_energy_tarif_1_2
+  cycle: monthly
+waermepumpe_ht_monthly:
+  source: sensor.sensor.total_energy_tarif_2_2
+  cycle: monthly

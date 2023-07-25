@@ -1,0 +1,57 @@
+switch:
+  - unique_id: tv_light
+    name: TV Licht
+    command_topic: "cmnd/tvlight/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+    state_on: "ON"
+    state_off: "OFF"
+
+sensor:
+  - unique_id: tv_light_voltage
+    name: Spannung TV Licht
+    value_template: '{{ value_json.ENERGY.Voltage }}'
+    unit_of_measurement: "V"
+    state_topic: "tele/tvlight/SENSOR"
+
+  - unique_id: tv_light_current
+    name: Strom TV Licht
+    value_template: '{{ value_json.ENERGY.Current }}'
+    unit_of_measurement: "A"
+    state_topic: "tele/tvlight/SENSOR"
+
+  - unique_id: tv_light_cosphi
+    name: Cos Phi TV Licht
+    value_template: '{{ value_json.ENERGY.Factor }}'
+    state_topic: "tele/tvlight/SENSOR"
+
+  - unique_id: tv_light_va
+    name: Scheinleistung TV Licht
+    value_template: '{{ value_json.ENERGY.ApparentPower }}'
+    unit_of_measurement: "VA"
+    state_topic: "tele/tvlight/SENSOR"
+
+  - unique_id: tv_light_var
+    name: Blindleistung TV Licht
+    value_template: '{{ value_json.ENERGY.ReactivePower }}'
+    unit_of_measurement: "Var"
+    state_topic: "tele/tvlight/SENSOR"
+
+  - unique_id: tv_light_watt
+    name: Leistung TV Licht
+    value_template: '{{ value_json.ENERGY.Power }}'
+    unit_of_measurement: "W"
+    state_topic: "tele/tvlight/SENSOR"
+
+  - unique_id: tv_light_kwh
+    name: Gesamtverbrauch TV Licht
+    value_template: '{{ value_json.ENERGY.Total }}'
+    unit_of_measurement: "kWh"
+    state_topic: "tele/tvlight/SENSOR"
+
+  - unique_id: tv_light_kwh_yesterda_yesterdayy
+    name: Verbrauch Vortag TV Licht
+    value_template: '{{ value_json.ENERGY.Yesterday }}'
+    unit_of_measurement: "kWh"
+    state_topic: "tele/tvlight/SENSOR"
+

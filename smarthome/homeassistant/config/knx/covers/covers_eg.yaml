@@ -1,0 +1,64 @@
+- name: "Jalousie Gibelseite Büro"
+  move_long_address: '3/1/60'
+  move_short_address: '3/2/60'
+  position_address: '3/4/60'
+  position_state_address: '3/6/60'
+  angle_address: '3/5/60'
+  angle_state_address: '3/7/60'
+  travelling_time_down: 60
+  travelling_time_up: 63
+  invert_position: true
+  invert_angle: true
+  invert_updown: true
+
+- name: "Jalousie Gibelseite Wohnzimmer"
+  move_long_address: '3/1/100'
+  move_short_address: '3/2/100'
+  position_address: '3/4/100'
+  position_state_address: '3/6/100'
+  angle_address: '3/5/100'
+  angle_state_address: '3/7/100'
+  travelling_time_down: 60
+  travelling_time_up: 63
+  invert_position: true
+  invert_angle: true
+  invert_updown: true
+
+- name: "Jalousie Traufseite Wohnzimmer"
+  move_long_address: '3/1/101'
+  move_short_address: '3/2/101'
+  position_address: '3/4/101'
+  position_state_address: '3/6/101'
+  angle_address: '3/5/101'
+  angle_state_address: '3/7/101'
+  travelling_time_down: 35
+  travelling_time_up: 38
+  invert_position: true
+  invert_angle: true
+  invert_updown: true
+
+- name: "Jalousie Esszimmer"
+  move_long_address: '3/1/110'
+  move_short_address: '3/2/110'
+  position_address: '3/4/110'
+  position_state_address: '3/6/110'
+  angle_address: '3/5/110'
+  angle_state_address: '3/7/110'
+  travelling_time_down: 60
+  travelling_time_up: 63
+  invert_position: true
+  invert_angle: true
+  invert_updown: true
+
+- name: "Jalousie Küche"
+  move_long_address: '3/1/120'
+  move_short_address: '3/2/120'
+  position_address: '3/4/120'
+  position_state_address: '3/6/120'
+  angle_address: '3/5/120'
+  angle_state_address: '3/7/120'
+  travelling_time_down: 35
+  travelling_time_up: 38
+  invert_position: true
+  invert_angle: true
+  invert_updown: true

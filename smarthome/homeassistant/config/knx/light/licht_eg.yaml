@@ -1,0 +1,40 @@
+- name: "Licht Büro"
+  address: "1/1/60"
+  state_address: "1/4/60"
+
+- name: "Licht Flur EG"
+  address: "1/1/70"
+  state_address: "1/4/70"
+
+- name: "Licht Abstellkammer"
+  address: "1/1/80"
+  state_address: "1/4/80"
+
+- name: "Licht Gästebad"
+  address: "1/1/90"
+  state_address: "1/4/90"
+
+- name: "Deckenspots Wohnzimmer"
+  address: "1/1/100"
+  state_address: "1/4/100"
+
+- name: "Deckenlampe Wohnzimmer"
+  address: "1/1/101"
+  state_address: "1/4/101"
+
+- name: "Deckenspots Esszimmer"
+  address: "1/1/110"
+  state_address: "1/4/110"
+
+- name: "Deckenlampe Esszimmer"
+  address: "1/1/111"
+  state_address: "1/4/111"
+
+- name: "Deckenspots Küche"
+  address: "1/1/120"
+  state_address: "1/4/120"
+
+- name: "Arbeitslicht Küche"
+  address: "1/1/121"
+  state_address: "1/4/121"
+

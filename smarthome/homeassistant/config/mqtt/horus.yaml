@@ -1,0 +1,48 @@
+sensor:
+  - unique_id: server_voltage
+    name: Spannung Horus
+    value_template: '{{ value_json.ENERGY.Voltage }}'
+    unit_of_measurement: "V"
+    state_topic: "tele/horus/SENSOR"
+
+  - unique_id: server_current
+    name: Strom Horus
+    value_template: '{{ value_json.ENERGY.Current }}'
+    unit_of_measurement: "A"
+    state_topic: "tele/horus/SENSOR"
+
+  - unique_id: server_cosphi
+    name: Cos Phi Horus
+    value_template: '{{ value_json.ENERGY.Factor }}'
+    state_topic: "tele/horus/SENSOR"
+
+  - unique_id: server_va
+    name: Scheinleistung Horus
+    value_template: '{{ value_json.ENERGY.ApparentPower }}'
+    unit_of_measurement: "VA"
+    state_topic: "tele/horus/SENSOR"
+
+  - unique_id: server_var
+    name: Blindleistung Horus
+    value_template: '{{ value_json.ENERGY.ReactivePower }}'
+    unit_of_measurement: "Var"
+    state_topic: "tele/horus/SENSOR"
+
+  - unique_id: server_watt
+    name: Leistung Horus
+    value_template: '{{ value_json.ENERGY.Power }}'
+    unit_of_measurement: "W"
+    state_topic: "tele/horus/SENSOR"
+
+  - unique_id: server_kwh
+    name: Gesamtverbrauch Horus
+    value_template: '{{ value_json.ENERGY.Total }}'
+    unit_of_measurement: "kWh"
+    state_topic: "tele/horus/SENSOR"
+
+  - unique_id: server_kwh_yesterday
+    name: Verbrauch Vortag Horus
+    value_template: '{{ value_json.ENERGY.Yesterday }}'
+    unit_of_measurement: "kWh"
+    state_topic: "tele/horus/SENSOR"
+

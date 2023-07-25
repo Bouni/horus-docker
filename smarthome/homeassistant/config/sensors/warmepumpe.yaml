@@ -1,0 +1,121 @@
+- platform: luxtronik
+  scan_interval: 60
+  sensors:
+    - group: calculations
+      id: ID_WEB_Temperatur_TVL
+      friendly_name: Temperatur Vorlauf
+      state_class: measurement
+
+    - group: calculations
+      id: ID_WEB_Temperatur_TRL
+      friendly_name: Temperatur Rücklauf
+      state_class: measurement
+
+    - group: calculations
+      id: ID_WEB_Temperatur_TRL_ext
+      friendly_name: Temperatur Rücklauf Soll
+      state_class: measurement
+
+    - group: calculations
+      id: ID_WEB_Sollwert_TRL_HZ
+      friendly_name: Temperatur Rücklauf Extern
+      state_class: measurement
+
+    - group: calculations
+      id: ID_WEB_Temperatur_THG
+      friendly_name: Temperatur Heissgas
+      state_class: measurement
+
+    - group: calculations
+      id: ID_WEB_Temperatur_TA
+      friendly_name: Aussentemperaturfühler
+      state_class: measurement
+
+    - group: calculations
+      id: ID_WEB_Mitteltemperatur
+      friendly_name: Mitteltemperatur
+      state_class: measurement
+
+    - group: calculations
+      id: ID_WEB_Einst_BWS_akt
+      friendly_name: Temperatur Brauchwasser Soll
+
+    - group: calculations
+      id: ID_WEB_Temperatur_TBW
+      friendly_name: Temperatur Brauchwasser
+      state_class: measurement
+
+    - group: calculations
+      id: ID_WEB_Temperatur_TFB1
+      friendly_name: Mischkreis 1 Vorlauf
+      state_class: measurement
+
+    - group: calculations
+      id: ID_WEB_Sollwert_TVL_MK1
+      friendly_name: Mischkreis 1 Vorlauf Soll
+
+    - group: calculations
+      id: ID_WEB_Temperatur_TFB2
+      friendly_name: Mischkreis 2 Vorlauf
+      state_class: measurement
+
+    - group: calculations
+      id: ID_WEB_Sollwert_TVL_MK2
+      friendly_name: Mischkreis 2 Vorlauf Soll
+
+    - group: calculations
+      id: ID_WEB_Temperatur_TWE
+      friendly_name: Fühler Wärmequelle Eingang
+      state_class: measurement
+
+    - group: calculations
+      id: ID_WEB_Temperatur_TWA
+      friendly_name: Fühler Wärmequelle Ausgang
+      state_class: measurement
+
+    - group: calculations
+      id: ID_WEB_LIN_UH
+      friendly_name: Überhitzung
+      state_class: measurement
+
+    - group: calculations
+      id: ID_WEB_LIN_UH_Soll
+      friendly_name: Überhitzung Soll
+
+    - group: calculations
+      id: ID_WEB_LIN_HD
+      friendly_name: Hochdruck
+      state_class: measurement
+
+    - group: calculations
+      id: ID_WEB_LIN_ND
+      friendly_name: Niederdruck
+      state_class: measurement
+
+    - group: parameters
+      id: 1
+      friendly_name: Temparatur +/-
+
+    - group: parameters
+      id: ID_Ba_Hz_akt
+      friendly_name: Betriebsart Heizung
+
+    - group: parameters
+      id: ID_Ba_Bw_akt
+      friendly_name: Betriebsart Brauchwasser
+
+    - group: parameters
+      id: ID_Einst_BA_Kuehl_akt
+      friendly_name: Betriebsart Kühlung
+
+    - group: calculations
+      id: ID_WEB_Time_WPein_akt
+      friendly_name: WPein
+
+- platform: template
+  sensors:
+    test_duration:
+      friendly_name: "wpein_duration"
+      device_class: duration
+      unit_of_measurement: "s"
+      value_template: "{{ states('sensor.wpein') }}"

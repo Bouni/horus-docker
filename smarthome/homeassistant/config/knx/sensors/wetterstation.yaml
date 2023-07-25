@@ -1,0 +1,28 @@
+- name: "Helligkeit Ost"
+  type: illuminance
+  state_address: "5/1/1"
+
+- name: "Helligkeit Süd"
+  type: illuminance
+  state_address: "5/1/2"
+
+- name: "Helligkeit West"
+  type: illuminance
+  state_address: "5/1/3"
+
+- name: "Dämmerung"
+  type: illuminance
+  state_address: "5/1/4"
+
+- name: "Windgeschwindigkeit"
+  type: wind_speed_ms
+  state_address: "5/2/1"
+
+- name: "Aussentemperatur Dach"
+  type: temperature
+  state_address: "5/3/1"
+
+
+
+
+

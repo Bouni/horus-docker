@@ -1,0 +1,95 @@
+- name: "Jalousie Gibelseite Schlafzimmer"
+  move_long_address: '3/1/10'
+  move_short_address: '3/2/10'
+  position_address: '3/4/10'
+  position_state_address: '3/6/10'
+  angle_address: '3/5/10'
+  angle_state_address: '3/7/10'
+  travelling_time_down: 60
+  travelling_time_up: 63
+  invert_position: true
+  invert_angle: true
+  invert_updown: true
+
+- name: "Rolladen Traufseite Schlafzimmer"
+  move_long_address: '3/1/11'
+  move_short_address: '3/2/11'
+  position_address: '3/4/11'
+  position_state_address: '3/6/11'
+  travelling_time_down: 16
+  travelling_time_up: 18
+  invert_position: true
+  invert_angle: true
+  invert_updown: true
+
+- name: "Jalousie Gibelseite Kinderzimmer Rhein"
+  move_long_address: '3/1/20'
+  move_short_address: '3/2/20'
+  position_address: '3/4/20'
+  position_state_address: '3/6/20'
+  angle_address: '3/5/20'
+  angle_state_address: '3/7/20'
+  travelling_time_down: 60
+  travelling_time_up: 61
+  invert_position: true
+  invert_angle: true
+  invert_updown: true
+
+- name: "Jalousie Traufseite Kinderzimmer Rhein"
+  move_long_address: '3/1/21'
+  move_short_address: '3/2/21'
+  position_address: '3/4/21'
+  position_state_address: '3/6/21'
+  angle_address: '3/5/21'
+  angle_state_address: '3/7/21'
+  travelling_time_down: 27
+  travelling_time_up: 29
+  invert_position: true
+  invert_angle: true
+  invert_updown: true
+
+- name: "Rolladen Giebelseite Kinderzimmer Burg"
+  move_long_address: '3/1/30'
+  move_short_address: '3/2/30'
+  position_address: '3/4/30'
+  position_state_address: '3/6/30'
+  travelling_time_down: 20
+  travelling_time_up: 22
+  invert_position: true
+  invert_angle: true
+  invert_updown: true
+
+- name: "Jalousie Traufseite Kinderzimmer Burg"
+  move_long_address: '3/1/31'
+  move_short_address: '3/2/31'
+  position_address: '3/4/31'
+  position_state_address: '3/6/31'
+  angle_address: '3/5/31'
+  angle_state_address: '3/7/31'
+  travelling_time_down: 27
+  travelling_time_up: 29
+  invert_position: true
+  invert_angle: true
+  invert_updown: true
+
+- name: "Rolladen Gibelseite Bad"
+  move_long_address: '3/1/40'
+  move_short_address: '3/2/40'
+  position_address: '3/4/40'
+  position_state_address: '3/6/40'
+  travelling_time_down: 20
+  travelling_time_up: 22
+  invert_position: true
+  invert_angle: true
+  invert_updown: true
+
+- name: "Rolladen Traufseite Bad"
+  move_long_address: '3/1/41'
+  move_short_address: '3/2/41'
+  position_address: '3/4/41'
+  position_state_address: '3/6/41'
+  travelling_time_down: 16
+  travelling_time_up: 18
+  invert_position: true
+  invert_angle: true
+  invert_updown: true
