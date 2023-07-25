@@ -1,0 +1,9 @@
+www/blog.bouni.de/*
+!www/blog.bouni.de/.gitkeep
+
+www/travel.bouni.de/*
+!www/travel.bouni.de/.gitkeep
+
+caddy/*
+!caddy/Caddyfile
+!caddy/Dockerfile

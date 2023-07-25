@@ -1,0 +1,197 @@
+{
+    admin off
+    log {
+        format console
+    }
+
+}
+
+(lanonly) {
+    @lanonly {
+        remote_ip forwarded 192.168.88.0/24 192.168.89.0/24 
+    }
+}
+
+(error) {
+    handle_errors {
+        root * /www/caddy
+        rewrite * /{http.error.status_code}.html
+        file_server
+    }
+}
+
+*.bouni.de, bouni.de {
+  
+  tls {
+    dns hetzner {env.HETZNER_AUTH_API_TOKEN}
+  }
+  
+  @fangorn host fangorn.bouni.de 
+  handle @fangorn {
+      reverse_proxy /api/* 192.168.88.23:8899
+      reverse_proxy /static/* 192.168.88.23:8899
+      reverse_proxy /admin/* 192.168.88.23:8899
+      reverse_proxy 192.168.88.23:8888
+  }
+
+  @dashboard host dashboard.bouni.de 
+  handle @dashboard {
+      reverse_proxy homer:8080
+  }
+
+  @homeassistant host ha.bouni.de
+  handle @homeassistant {
+      reverse_proxy * 192.168.88.23:8123
+  }
+
+  @shiori host shiori.bouni.de 
+  handle @shiori {
+      reverse_proxy shiori:8080
+  }
+
+  @grafana host grafana.bouni.de 
+  handle @grafana {
+      reverse_proxy grafana:3000
+  }
+
+  @vikunja host vikunja.bouni.de 
+  handle @vikunja {
+      reverse_proxy /api/* vikunja-api:3456
+      reverse_proxy /.well-known/* vikunja-api:3456
+      reverse_proxy /dav/* vikunja-api:3456
+      reverse_proxy vikunja-frontend:80
+  }
+
+  @webdav host webdav.bouni.de 
+  handle @webdav {
+      reverse_proxy webdav:7070
+  }
+  
+  @vault host vault.bouni.de 
+  handle @vault {
+      reverse_proxy vaultwarden
+  }
+
+  @photos host photos.bouni.de 
+  handle @photos {
+      reverse_proxy photoview
+  }
+
+  @blog host blog.bouni.de 
+  handle @blog {
+      root * /www/blog.bouni.de
+      file_server
+      #import error
+  }
+  
+  @comments host comments.bouni.de 
+  handle @comments {
+      reverse_proxy remark42:8080 
+        
+  }
+
+  @vpn host vpn.bouni.de 
+  handle @vpn {
+      reverse_proxy wg-easy:51821
+  }
+
+  @syncthing host syncthing.bouni.de 
+  handle @syncthing {
+      reverse_proxy syncthing:8384 
+  }
+  
+
+  @travel host travel.bouni.de 
+  handle @travel {
+    root * /www/travel.bouni.de
+    file_server
+  }
+
+  @metrics host metrics.bouni.de
+  handle @metrics {
+      basicauth * {
+        prometheus $2a$14$FpnGmQls9QqXTVf.eIeoBOy.U7l09rQxZtBddaDMs5jcZgWbWIhjm 
+      }
+      # reverse_proxy blocky:4000 
+      handle_path /blocky/* {
+        reverse_proxy 192.168.88.23:4000 
+      }
+      handle_path /endlessh/* {
+        reverse_proxy endlessh:2112
+      }
+  }
+  
+  @omada host omada.bouni.de
+  handle @omada {
+      reverse_proxy omada-controller:8043 {
+        transport http {
+          tls_insecure_skip_verify
+        }
+        header_up Host {host}:8043
+        header_down Location :8043 :443
+      }
+  }
+
+
+}
+
+
+# # Internal only
+# 
+# travel.bouni.de {
+#     handle @lanonly {
+#         root * /www/travel.bouni.de
+#         file_server
+#     }
+#     error * 403
+#     import error
+# }
+# 
+# 
+# pihole.bouni.de {
+#     #redir / /admin/
+#     #reverse_proxy pihole
+# 
+#     import lanonly
+#     handle @lanonly {
+#         redir / /admin/
+#         reverse_proxy pihole
+#     }
+#     error * 403
+#     import error
+#     log {
+#       format console
+#       level INFO
+#     }
+# }
+# 
+# 
+# 
+# omada.bouni.de {
+#     import lanonly
+#     handle @lanonly {
+#         reverse_proxy omada-controller:8043 {
+#             transport http {
+#                 tls_insecure_skip_verify
+#             }
+#             header_up Host {host}:8043
+#             header_down Location :8043 :443
+#         }
+#     }
+#     log
+#     error * 403
+#     import error
+# 
+#     #import lanonly
+#     #handle @lanonly {
+#     #    reverse_proxy omada-controller:8043 {
+#     #        transport http {
+#     #            tls_insecure_skip_verify                           
+#     #        }
+#     #        #header_up Host "omada.bouni.de:443"
+#     #        #header_down Location :8088 :443
+#     #    }
+#     #}
+#     #error * 403
+#     #import error
+# }
