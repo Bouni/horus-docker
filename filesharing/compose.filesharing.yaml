@@ -28,6 +28,8 @@ services:
       - /storage/webdav:/data
       - /opt/docker/filesharing/webdav/config.yaml:/config.yaml
     command: --config /config.yaml
+    networks:
+      - webserver
 
 networks:
   default:
