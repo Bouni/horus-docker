@@ -570,3 +570,37 @@
     target:
       entity_id: input_number.stromtarif_wp_ht_1_8_2
   mode: single
+- id: '1690310217938'
+  alias: Waschmaschine fertig
+  description: ''
+  use_blueprint:
+    path: sbyx/notify-or-do-something-when-an-appliance-like-a-dishwasher-or-washing-machine-finishes.yaml
+    input:
+      power_sensor: sensor.powerplug4_watt
+      actions:
+      - service: notify.mobile_app_oneplus8t
+        data:
+          message: Waschmaschine ist fertig
+      pre_actions:
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 0
+          milliseconds: 1
+- id: '1690310293706'
+  alias: Trockner ist fertig
+  description: ''
+  use_blueprint:
+    path: sbyx/notify-or-do-something-when-an-appliance-like-a-dishwasher-or-washing-machine-finishes.yaml
+    input:
+      power_sensor: sensor.powerplug2_watt
+      actions:
+      - service: notify.mobile_app_oneplus8t
+        data:
+          message: Trockner ist fertig
+      pre_actions:
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 0
+          milliseconds: 1
