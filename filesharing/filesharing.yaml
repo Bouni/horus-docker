@@ -1,7 +1,4 @@
-version: "3"
-
 services:
-
   syncthing:
     image: linuxserver/syncthing
     container_name: syncthing
@@ -18,6 +15,8 @@ services:
       - 21027:21027/udp
     networks:
       - webserver
+    depends_on:
+      - caddy
 
   webdav:
     container_name: webdav
@@ -30,9 +29,9 @@ services:
     command: --config /config.yaml
     networks:
       - webserver
+    depends_on:
+      - caddy
 
 networks:
-  default:
+  filesharing:
     name: filesharing
-  webserver:
-    external: true

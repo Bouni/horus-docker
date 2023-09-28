@@ -8,14 +8,14 @@ services:
       - UID=1000
       - GID=1000
     volumes:
-      - /opt/docker/internal-services/homer:/www/assets
+      - /opt/docker/internal/homer:/www/assets
     restart: unless-stopped
     networks:
       - webserver
-
+      - internal
+    depends_on:
+      - caddy
 
 networks:
-  default:
-    name: internal-services
-  webserver:
-    external: true
+  internal:
+    name: internal

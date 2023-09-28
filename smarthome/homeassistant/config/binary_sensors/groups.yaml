@@ -1,0 +1,27 @@
+- platform: group
+  name: Fenster EG
+  entities:
+    - binary_sensor.buero_fenster_linker_fluegel
+    - binary_sensor.buero_fenster_rechter_fluegel
+    - binary_sensor.buero_balkontuere
+    - binary_sensor.gaestebad_fenster
+    # - binary_sensor.haustuere
+    - binary_sensor.kueche_fenster_linker_fluegel
+    - binary_sensor.kueche_fenster_rechter_fluegel
+    - binary_sensor.wohnzimmer_balkontuere
+    - binary_sensor.wohnzimmer_fenster_linker_fluegel
+    - binary_sensor.wohnzimmer_fenster_rechter_fluegel
+
+- platform: group
+  name: Fenster OG
+  entities:
+    - binary_sensor.schlafzimmer_balkontuere
+    - binary_sensor.schlafzimmer_flaches_fenster
+    - binary_sensor.kleines_fenster
+    - binary_sensor.grosses_fenster_linker_fluegel
+    - binary_sensor.grosses_fenster_rechter_fluegel
+    - binary_sensor.kinderzimmer_2_grosses_fenster_linker_fluegel
+    - binary_sensor.kinderzimmer_2_grosses_fenster_rechter_fluegel
+    - binary_sensor.kinderzimmer_2_flaches_fenster
+    - binary_sensor.kinderzimmer_1_flaches_fenster
+    - binary_sensor.kinderzimmer_1_balkontuere

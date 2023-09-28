@@ -6,9 +6,9 @@ energy:
 logger:
   default: warning
   logs:
-    xknx:
-      error
-    custom_components.landroid_cloud: debug
+    xknx: error
+    custom_components.landroid_cloud:
+      debug
       #custom_components.drkblutspende: debug
       # custom_components.drkblutspende: debug
 
@@ -26,40 +26,40 @@ recorder:
       - call_service
 
 history:
-  exclude:
-    entities:
-      - sensor.cos_phi_horus
-      - sensor.cos_phi_kaffemaschine
-      - sensor.cos_phi_kuhlschrank
-      - sensor.cos_phi_waschmaschine
-      - sensor.energy_cost_ht
-      - sensor.energy_cost_nt
-      - sensor.energy_cost_standard
-      - sensor.blindleistung_horus
-      - sensor.blindleistung_kaffemaschine
-      - sensor.blindleistung_kuhlschrank
-      - sensor.blindleistung_waschmaschine
-      - sensor.scheinleistung_horus
-      - sensor.scheinleistung_kaffemaschine
-      - sensor.scheinleistung_kuhlschrank
-      - sensor.scheinleistung_waschmaschine
-      - sensor.spannung_horus
-      - sensor.spannung_kaffemaschine
-      - sensor.spannung_kuhlschrank
-      - sensor.spannung_waschmaschine
-      - sensor.strom_horus
-      - sensor.strom_kaffemaschine
-      - sensor.strom_kuhlschrank
-      - sensor.strom_waschmaschine
-      - sensor.leistung_horus
-      - sensor.leistung_kaffemaschine
-      - sensor.leistung_kuhlschrank
-      - sensor.leistung_waschmaschine
-      - sensor.gesamtverbrauch_horus
-      - sensor.gesamtverbrauch_kaffemaschine
-      - sensor.gesamtverbrauch_kuhlschrank
-      - sensor.gesamtverbrauch_waschmaschine
-      - sensor.zero
+  # exclude:
+  #   entities:
+  #     - sensor.cos_phi_horus
+  #     - sensor.cos_phi_kaffemaschine
+  #     - sensor.cos_phi_kuhlschrank
+  #     - sensor.cos_phi_waschmaschine
+  #     - sensor.energy_cost_ht
+  #     - sensor.energy_cost_nt
+  #     - sensor.energy_cost_standard
+  #     - sensor.blindleistung_horus
+  #     - sensor.blindleistung_kaffemaschine
+  #     - sensor.blindleistung_kuhlschrank
+  #     - sensor.blindleistung_waschmaschine
+  #     - sensor.scheinleistung_horus
+  #     - sensor.scheinleistung_kaffemaschine
+  #     - sensor.scheinleistung_kuhlschrank
+  #     - sensor.scheinleistung_waschmaschine
+  #     - sensor.spannung_horus
+  #     - sensor.spannung_kaffemaschine
+  #     - sensor.spannung_kuhlschrank
+  #     - sensor.spannung_waschmaschine
+  #     - sensor.strom_horus
+  #     - sensor.strom_kaffemaschine
+  #     - sensor.strom_kuhlschrank
+  #     - sensor.strom_waschmaschine
+  #     - sensor.leistung_horus
+  #     - sensor.leistung_kaffemaschine
+  #     - sensor.leistung_kuhlschrank
+  #     - sensor.leistung_waschmaschine
+  #     - sensor.gesamtverbrauch_horus
+  #     - sensor.gesamtverbrauch_kaffemaschine
+  #     - sensor.gesamtverbrauch_kuhlschrank
+  #     - sensor.gesamtverbrauch_waschmaschine
+  #     - sensor.zero
 
 system_health:
 frontend:

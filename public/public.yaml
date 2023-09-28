@@ -1,30 +1,30 @@
-version: "3"
-
 services:
-
   vikunja-api:
     container_name: vikunja-api
     image: vikunja/api
     ports:
       - 3456:3456
     volumes:
-      - /opt/docker/public-services/vikunja/files:/app/vikunja/files
-      - /opt/docker/public-services/vikunja/db/vikunja.db:/app/vikunja/vikunja.db
-      - /opt/docker/public-services/vikunja/config.yml:/app/vikunja/config.yaml
+      - /opt/docker/public/vikunja/files:/app/vikunja/files
+      - /opt/docker/public/vikunja/db/vikunja.db:/app/vikunja/vikunja.db
+      - /opt/docker/public/vikunja/config.yml:/app/vikunja/config.yaml
     env_file:
-      - /opt/docker/public-services/vikunja/vikunja.env
+      - /opt/docker/public/vikunja/vikunja.env
     restart: unless-stopped
     networks:
       - webserver
+    depends_on:
+      - caddy
 
   vikunja-frontend:
     container_name: vikunja-frontend
     image: vikunja/frontend
-    depends_on:
-      - vikunja-api
     restart: unless-stopped
     networks:
       - webserver
+    depends_on:
+      - vikunja-api
+      - caddy
 
   vaultwarden:
     container_name: vaultwarden
@@ -33,63 +33,67 @@ services:
     environment:
       - DOMAIN=https://vault.bouni.de
     volumes:
-      - /opt/docker/public-services/vaultwarden:/data
+      - /opt/docker/public/vaultwarden:/data
     networks:
       - webserver
+    depends_on:
+      - caddy
 
   shiori:
     container_name: shiori
     image: ghcr.io/go-shiori/shiori:latest
     restart: always
     volumes:
-      - /opt/docker/public-services/shiori:/shiori
+      - /opt/docker/public/shiori:/shiori
     networks:
       - webserver
+    depends_on:
+      - caddy
 
   remark42:
     container_name: remark42
     image: umputun/remark42:latest
     # user: "1000:1000"
     env_file:
-      - /opt/docker/public-services/remark42/remark42.env
+      - /opt/docker/public/remark42/remark42.env
     volumes:
-      - /opt/docker/public-services/remark42/data:/srv/var
+      - /opt/docker/public/remark42/data:/srv/var
     restart: unless-stopped
     networks:
       - webserver
+    depends_on:
+      - caddy
 
   mariadb:
     container_name: mariadb
     image: mariadb:10.5
     restart: always
     env_file:
-      - /opt/docker/public-services/photoview/photoviewdb.env
+      - /opt/docker/public/photoview/photoviewdb.env
     volumes:
-      - /opt/docker/public-services/photoview/mysql:/var/lib/mysql
+      - /opt/docker/public/photoview/mysql:/var/lib/mysql
     networks:
-      - default 
+      - photoview
 
   photoview:
     container_name: photoview
     image: viktorstrate/photoview:latest
     restart: always
-    depends_on:
-      - mariadb
     env_file:
-      - /opt/docker/public-services/photoview/photoview.env
+      - /opt/docker/public/photoview/photoview.env
     volumes:
       #- /etc/timezone:/etc/timezone:ro
       #- /etc/localtime:/etc/localtime:ro
-      - /opt/docker/public-services/photoview/api_cache:/app/cache
+      - /opt/docker/public/photoview/api_cache:/app/cache
       - /storage/pictures:/bouni/photos:ro
       - /storage/pictures-to-sort:/bouni/photos-to-sort:ro
     networks:
       - webserver
-      - default 
-
+      - photoview
+    depends_on:
+      - mariadb
+      - caddy
 
 networks:
-  default:
-    name: public-services
-  webserver:
-    external: true
+  photoview:
+    name: photoview

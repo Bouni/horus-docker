@@ -1,7 +1,13 @@
 version: "3"
 
-services:
+include:
+  - /opt/docker/filesharing/filesharing.yaml
+  - /opt/docker/internal/internal.yaml
+  - /opt/docker/network/network.yaml
+  - /opt/docker/public/public.yaml
+  - /opt/docker/smarthome/smarthome.yaml
 
+services:
   caddy:
     container_name: caddy
     image: custom-caddy

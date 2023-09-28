@@ -1,0 +1,25 @@
+- platform: template
+  sensors:
+    fenster_eg_offen:
+      friendly_name: "Anzahl offener fenster EG"
+      value_template: >-
+        {% set ns = namespace(c = 0) %}
+        {%- for entity_id in states.binary_sensor.fenster_eg.attributes.entity_id -%}
+              {%- if states(entity_id) == 'on' %}
+                {% set ns.c = ns.c + 1 %}
+              {% endif -%}
+        {%- endfor %}
+        {{  ns.c  }}
+
+- platform: template
+  sensors:
+    fenster_og_offen:
+      friendly_name: "Anzahl offener fenster OG"
+      value_template: >-
+        {% set ns = namespace(c = 0) %}
+        {%- for entity_id in states.binary_sensor.fenster_og.attributes.entity_id -%}
+              {%- if states(entity_id) == 'on' %}
+                {% set ns.c = ns.c + 1 %}
+              {% endif -%}
+        {%- endfor %}
+        {{  ns.c  }}

@@ -1,23 +1,22 @@
-version: "3"
-
 services:
   homeassistant:
     container_name: home-assistant
-    image: homeassistant/home-assistant:beta
+    image: homeassistant/home-assistant:2023.9
     volumes:
       - /opt/docker/smarthome/homeassistant/config:/config
       - /dev/modbus0:/dev/modbus0
     env_file:
       - /opt/docker/smarthome/homeassistant/homeassistant.env
     restart: unless-stopped
-    depends_on:
-      - mosquitto
-      - influxdb
-      - postgresql
     expose:
       - 8123
     network_mode: "host"
     privileged: true
+    depends_on:
+      - caddy
+      - mosquitto
+      - influxdb
+      - postgresql
 
   postgresql:
     container_name: postgresql
@@ -31,6 +30,8 @@ services:
     ports:
       - "127.0.0.1:5432:5432"
     restart: unless-stopped
+    networks:
+      - smarthome
 
   influxdb:
     container_name: influxdb
@@ -41,6 +42,10 @@ services:
     ports:
       - "8086:8086"
     restart: unless-stopped
+    networks:
+      - smarthome
+    depends_on:
+      - caddy
 
   mosquitto:
     image: eclipse-mosquitto
@@ -53,10 +58,11 @@ services:
       - "1883:1883"
       - "9001:9001"
     restart: unless-stopped
-
+    networks:
+      - smarthome
+    depends_on:
+      - caddy
 
 networks:
-  default:
+  smarthome:
     name: smarthome
-  webserver:
-    external: true
