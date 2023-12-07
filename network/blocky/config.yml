@@ -28,6 +28,8 @@ customDNS:
     syncthing.bouni.de: 192.168.88.23
     vpn.bouni.de: 192.168.88.23
     omada.bouni.de: 192.168.88.23
+    paperless.bouni.de: 192.168.88.23
+    immich.bouni.de: 192.168.88.23
 
 blocking:
   blackLists:
@@ -92,4 +94,3 @@ log:
   format: text
   timestamp: true
   privacy: false
-

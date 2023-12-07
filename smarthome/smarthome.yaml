@@ -1,7 +1,7 @@
 services:
   homeassistant:
     container_name: home-assistant
-    image: homeassistant/home-assistant:2023.9
+    image: homeassistant/home-assistant
     volumes:
       - /opt/docker/smarthome/homeassistant/config:/config
       - /dev/modbus0:/dev/modbus0

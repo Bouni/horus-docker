@@ -29,3 +29,11 @@
   street: 15720
   trash_ids: "51, 17, 48, 31, 43, 20, 321"
   pattern: Gelber Sack
+
+- platform: abfallplus
+  name: DEBUG Abfall
+  key: e21758b9c711463552fb9c70ac7d4273
+  municipality: 2593
+  street: 495
+  trash_ids: "50,161,53,31,169,50,161,53,31,169"
+  pattern: Papier

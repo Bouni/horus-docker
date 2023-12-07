@@ -33,6 +33,17 @@
       reverse_proxy /admin/* 192.168.88.23:8899
       reverse_proxy 192.168.88.23:8888
   }
+  
+  @immich host immich.bouni.de 
+  handle @immich {
+    reverse_proxy immich-server:3001
+  }
+  
+  @paperless host paperless.bouni.de 
+  handle @paperless {
+      reverse_proxy paperless:8000
+  }
+
 
   @dashboard host dashboard.bouni.de 
   handle @dashboard {

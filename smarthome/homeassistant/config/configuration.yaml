@@ -8,9 +8,10 @@ logger:
   logs:
     xknx: error
     custom_components.landroid_cloud:
-      debug
+      error
       #custom_components.drkblutspende: debug
       # custom_components.drkblutspende: debug
+    custom_components.abfallplus: debug
 
 recorder:
   db_url: !secret postgres_db_url

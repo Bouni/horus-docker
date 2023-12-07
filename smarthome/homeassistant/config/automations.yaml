@@ -462,7 +462,7 @@
       destination: 6/1/134
   condition: []
   action:
-  - service: landroid_cloud.start
+  - service: vacuum.start
     data: {}
   - service: notify.mobile_app_oneplus8t
     data:
